@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import "../../assets/css/login.css";
 import { apiHandler } from '../../api';
 import { endpoint } from '../../api/endpoint';
-import { GENERATEOTP, VALIDATEOTP, CUSTOMERDATA, CUSTOMER_CART, GET_CUSTOMER_CART, BANNERS } from '../../assets/graphql';
+import { GENERATEOTP, VALIDATEOTP, CUSTOMERDATA, CUSTOMER_CART, GET_CUSTOMER_CART, BANNERS, GETWISHLIST } from '../../assets/graphql';
 import { useNavigate } from "react-router-dom";
 import { saveToken, saveUserData } from "../../features/login/loginDataSlice";
-import {savecustomerresult, saveaddtoproductcart, saveBanner} from '../../features/HomePageSlice/homeDataSlice';
+import {savecustomerresult, saveaddtoproductcart, saveBanner, savewishlist} from '../../features/HomePageSlice/homeDataSlice';
 import { useDispatch } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -135,10 +135,26 @@ const Login = () => {
                 dispatch(
                     saveaddtoproductcart(result.data.cart)
                 );
+                getWishListData(token);
             }
             else {
                 toast.error(result.data.message);
             }
+        }
+    };
+    const getWishListData = async (token) => {
+        const wishlistresult = await apiHandler({
+            url: endpoint.GRAPHQL_URL,
+            method: 'POST',
+            authToken: token,
+            data: {
+                base_url: endpoint.API_BASE_URL,
+                variables: {},
+                query: GETWISHLIST,
+            },
+        });
+        if (!wishlistresult.data.error_code) {
+            dispatch(savewishlist(wishlistresult.data.wishlist));
         }
     };
     const getBannersList = async (token) => {
@@ -230,7 +246,7 @@ const Login = () => {
                                                 <div className="mobile_box">
                                                     <div className="form_row">
                                                         <label for="">Enter Your Email:</label>
-                                                        <input type="text" name="mobile" id="mobile" value={userEmail} onChange={(e) => setUserEmail(e.target.value)}  onKeyDown={(e) => handleKeypress(e)} placeholder="Enter your email" autoFocus />
+                                                        <input type="text" name="mobile" id="mobile" value={userEmail} onChange={(e) => setUserEmail(e.target.value)}  onKeyDown={(e) => handleKeypress(e)} placeholder="Enter email id" />
                                                     </div>
                                                     <div className="form_row">
                                                         <button type="submit" className="btn default_button" onClick={LoginFn} >Request OTP</button>

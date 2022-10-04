@@ -1,0 +1,35 @@
+.cart_wrap {
+    background: #f3f3f3;
+    padding: 110px 0px;
+  }
+  .thankyoucontainer {
+    background: #ffffff;
+    margin-top: 80px;
+    text-align: center;
+    padding: 50px;
+    border-radius: 4px;
+    box-shadow: 0px 0px 7px 2px #0000000a;
+  }
+  .thankyoucontainer h1 {
+    color: #00abc5;
+    font-size: 70px;
+  }
+  .thankyoucontainer h2 {
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+  }
+  .thankyoucontainer h2 span {
+    display: block;
+    font-size: 50px;
+    text-transform: uppercase;
+    color: #dfcf18;
+    letter-spacing: normal;
+  }
+  .thankyoucontainer p {
+    font-size: 16px;
+    letter-spacing: 1px;
+    margin-top: 20px;
+    font-weight: 600;
+  }
+  

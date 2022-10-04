@@ -9,11 +9,18 @@ import { endpoint } from '../../api/endpoint';
 import ExtendOrderList from '../../components/common/OrderList/ExtendOrderList';
 import MyAccountMenu from '../../components/common/MyAccountMenu/MyAccountMenu';
 import { useNavigate } from "react-router-dom";
+import { getSampleCurrencyFormat } from '../../utils/utils';
+import mydashboard from "../../assets/img/account/mydashboard.png";
+import accountinformation from "../../assets/img/account/accountinformation.png";
+import myorders from "../../assets/img/account/myorders.png";
+import addressbook from "../../assets/img/account/addressbook.png";
+import mywishlist from "../../assets/img/account/mywishlist.png";
 
 const OrderListing = () => {
     const { getcustomerorderlist } = useSelector(
         (state) => state.home
     );
+    console.log(getcustomerorderlist);
     // const data = getcustomerorderlist.sort().reverse()
     // console.log(data)
     const { userData } = useSelector((state) => state.login);
@@ -21,6 +28,7 @@ const OrderListing = () => {
     const navigate = useNavigate();
     const { token } = useSelector((state) => state.login);
     const GetCustomerOrderList = async () => {
+
         if (token) {
             const result = await apiHandler({
                 url: endpoint.GRAPHQL_URL,
@@ -33,8 +41,8 @@ const OrderListing = () => {
                 },
             });
             console.log(result);
-            if (result.data.customer) {
-                let data = result.data.customer.orders.items.sort((a, b) => (new Date(a.order_date) > new Date(b.order_date) ? -1 : 1));
+            if (result.data.customerOrders) {
+                let data = result.data.customerOrders.items.sort((a, b) => (a.id > b.id ? -1 : 1));
                 console.log(data)
                 dispatch(savecustomerorderlist(data));
             }
@@ -81,11 +89,11 @@ const OrderListing = () => {
                                 </div>
                                 <div class="dashboardmenu">
                                     <ul>
-                                        <li><a href="/#/dashboard"><img src="img/mydashboard.png" alt="" /> My Dashboard</a></li>
-                                        <li><a href="/#/account-information"><img src="img/accountinformation.png" alt="" /> Account Information</a></li>
-                                        <li class="active"><a href="/#/order-listing"><img src="img/myorders.png" alt="" /> My Orders</a></li>
-                                        <li><a href="/#/address-book"><img src="img/addressbook.png" alt="" /> Address Book</a></li>
-                                        <li><a href="/#/my-wish-list"><img src="img/mywishlist.png" alt="" /> My Wishlist</a></li>
+                                        <li><a href="/#/dashboard"><img src={mydashboard} alt="" /> My Dashboard</a></li>
+                                        <li><a href="/#/account-information"><img src={accountinformation} alt="" /> Account Information</a></li>
+                                        <li class="active"><a href="/#/order-listing"><img src={myorders} alt="" /> My Orders</a></li>
+                                        <li><a href="/#/address-book"><img src={addressbook} alt="" /> Address Book</a></li>
+                                        <li><a href="/#/my-wish-list"><img src={mywishlist} alt="" /> My Wishlist</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -100,7 +108,7 @@ const OrderListing = () => {
                                             id={list.id}
                                             Orderid={list.order_number}
                                             ProductName={list.title}
-                                            FinalPrice={list.total.grand_total}
+                                            FinalPrice={getSampleCurrencyFormat("INR", list.grand_total)}
                                             OldPrice={list.price}
                                             deliveryDate={list.order_date}
                                         />

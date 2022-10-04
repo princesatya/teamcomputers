@@ -45,7 +45,8 @@ const ProductCarouselCard = ({ filterData, selectedFilterUid, step, selectedOpti
 
     const dispatch = useDispatch();
     const { token } = useSelector((state) => state.login);
-    const { productDetails } = useSelector((state) => state.home);
+    const { productDetails, createcomparelist } = useSelector((state) => state.home);
+    console.log(createcomparelist);
     const [loader, setLoader] = useState(false);
 
     const getLatestCartInfo = async (cartId) => {
@@ -122,7 +123,7 @@ const ProductCarouselCard = ({ filterData, selectedFilterUid, step, selectedOpti
                 data: {
                     base_url: endpoint.API_BASE_URL,
                     variables: {
-                        cartId: customerresult && customerresult.data && customerresult.data.customerCart && customerresult.data.customerCart.id ? customerresult.data.customerCart.id : "",
+                        cartId: customerresult.data.customerCart.id,
                         items: [
                             {
                                 quantity: 1,
@@ -136,7 +137,7 @@ const ProductCarouselCard = ({ filterData, selectedFilterUid, step, selectedOpti
             });
             setLoader(false);
             console.log(result);
-            if (!result.data.message) {
+            if (!result.data.addProductsToCart.user_errors[0]) {
                 // dispatch(
                 //     saveaddtoproductcart(result.data.addProductsToCart.cart.items)
                 // );
@@ -146,7 +147,7 @@ const ProductCarouselCard = ({ filterData, selectedFilterUid, step, selectedOpti
                 if (isCheckout) navigate('/checkout');
             }
             else {
-                toast.error(result.data.message);
+                toast.error(result.data.addProductsToCart.user_errors[0].message);
             }
         } else {
             navigate('/login');
@@ -154,7 +155,7 @@ const ProductCarouselCard = ({ filterData, selectedFilterUid, step, selectedOpti
     };
     const AddToWishlist = async (sharing_code) => {
         if (token) {
-            setLoader(true);
+            // setLoader(true);
             const wishlistresult = await apiHandler({
                 url: endpoint.GRAPHQL_URL,
                 method: 'POST',
@@ -165,11 +166,12 @@ const ProductCarouselCard = ({ filterData, selectedFilterUid, step, selectedOpti
                     query: GETWISHLIST,
                 },
             });
-            setLoader(false);
-            if (!wishlistresult.data.message) {
+            // setLoader(false);
+            if (wishlistresult.data.wishlist) {
                 dispatch(savewishlist(wishlistresult.data.wishlist));
-                addtocartwishlist(sharing_code)
-
+                toast.success('Added Successfully');
+                console.log(wishlistresult.data.wishlist);
+                addtocartwishlist(wishlistresult);
             }
             else {
                 toast.error(wishlistresult.data.message);
@@ -194,7 +196,7 @@ const ProductCarouselCard = ({ filterData, selectedFilterUid, step, selectedOpti
     };
     const addtocartwishlist = async (wishlistresult) => {
         console.log(wishlistresult);
-        setLoader(true);
+        // setLoader(true);
         const result = await apiHandler({
             url: endpoint.GRAPHQL_URL,
             method: 'POST',
@@ -226,7 +228,7 @@ const ProductCarouselCard = ({ filterData, selectedFilterUid, step, selectedOpti
             },
 
         });
-        setLoader(false);
+        // setLoader(false);
 
     }
     const getProductDetailUid = () => {
@@ -237,7 +239,7 @@ const ProductCarouselCard = ({ filterData, selectedFilterUid, step, selectedOpti
                 // let productName = product.name;
                 // let priceRange = product.price_range;
                 prductUid = product.uid;
-
+                console.log(prductUid);
 
                 let optionEnabled = false;
                 let optionPrice = 0;
@@ -277,7 +279,6 @@ const ProductCarouselCard = ({ filterData, selectedFilterUid, step, selectedOpti
 
     const AddToCompare = async () => {
         if (token) {
-
             const compareresult = await apiHandler({
                 url: endpoint.GRAPHQL_URL,
                 method: 'POST',
@@ -285,11 +286,12 @@ const ProductCarouselCard = ({ filterData, selectedFilterUid, step, selectedOpti
                 data: {
                     base_url: endpoint.API_BASE_URL,
                     variables: {
-                        uid: getProductDetailUid()
+                        uid: createcomparelist.uid
                     },
                     query: GET_COMPARE_LIST,
                 },
             });
+            console.log(compareresult);
 
             // if (!compareresult.data.message) {
             //     dispatch(savegetcomparelist(compareresult));
@@ -309,8 +311,9 @@ const ProductCarouselCard = ({ filterData, selectedFilterUid, step, selectedOpti
                 },
             });
             if (!result.data.message) {
-                dispatch(savecreatecomparelist(result));
-                console.log(result);
+                dispatch(savecreatecomparelist(result.data.createCompareList));
+                toast.success('Added Successfully');
+                console.log(result.data.createCompareList);
             }
 
 

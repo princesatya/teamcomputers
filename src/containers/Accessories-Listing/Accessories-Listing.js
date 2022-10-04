@@ -14,22 +14,31 @@ const AccessoriesList = () => {
     );
 
     return (
-        <div className=" mobile-carousel-team-computer mt-5">
-            <section className="productaddsection pb-5 pt-5">
+        <>
+          <section className="custombreadcrumb">
                 <div className="container">
-                    <div className="row">
-                        <div className="col-xl-9 mx-auto text-center pt-5 pb-5">
-                            <div className="mainsection-title">
-                                <h2>Accessories</h2>
+                    <ul className="breadcrumb justify-content-start">
+                        <li className="breadcrumb-item"><a href="/#/home">Home</a></li>
+                        <li className="breadcrumb-item active">Accessories</li>
+                    </ul>
+                </div>
+            </section>
+            <div className=" mobile-carousel-team-computer mt-5">
+                <section className="productaddsection pb-5 pt-5">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-xl-9 mx-auto text-center pt-5 pb-5">
+                                <div className="mainsection-title">
+                                    <h2>Accessories</h2>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                {/* <!-- Desktop View Accessories section --> */}
-                <div className="container-fluid d-none d-lg-block d-md-block">
-                    {/* <div className="row"> */}
-                    {/* <div className="col-md-3 Text-decoration-adbanner-byAirpods">
+                    {/* <!-- Desktop View Accessories section --> */}
+                    <div className="container-fluid d-none d-lg-block d-md-block">
+                        {/* <div className="row"> */}
+                        {/* <div className="col-md-3 Text-decoration-adbanner-byAirpods">
                             <div className="addbanner ">
                                 <h4><span> It’s magic,</span> Remastered.</h4>
                                 <p>Spatial audio with dynamic head tracking in an all-new design.</p>
@@ -40,14 +49,14 @@ const AccessoriesList = () => {
                             </div>
                         </div> */}
 
-                    {/* <div className="col-md-9"> */}
-                    <div className="row">
-                        {accessories && accessories.map((accessory, index) =>
-                            <div className="col-md-3">
-                                <AccessoriesSectionCard id={accessory.sku} PrductImg={accessory.image.url} ProductDetail={accessory.name} ProductPrice={getSampleCurrencyFormat(accessory.price_range.minimum_price.final_price.currency, accessory.price_range.minimum_price.final_price.value)} />
-                            </div>
-                        )}
-                        {/* <div className="col-md-4">
+                        {/* <div className="col-md-9"> */}
+                        <div className="row">
+                            {accessories && accessories.map((accessory, index) =>
+                                <div className="col-md-3">
+                                    <AccessoriesSectionCard id={accessory.sku} PrductImg={accessory.image.url} ProductDetail={accessory.name} ProductPrice={getSampleCurrencyFormat(accessory.price_range.minimum_price.final_price.currency, accessory.price_range.minimum_price.final_price.value)} />
+                                </div>
+                            )}
+                            {/* <div className="col-md-4">
                                     <AccessoriesSectionCard PrductImg={accessoriesproduct1} ProductDetail="IPHONE 11 128GB (PRODUCT)RED WRLS" ProductPrice={getSampleCurrencyFormat()} />
                                 </div>
                                 <div className="col-md-4">
@@ -57,7 +66,7 @@ const AccessoriesList = () => {
                                     <AccessoriesSectionCard PrductImg={accessoriesproduct1} ProductDetail="IPHONE 11 128GB (PRODUCT)RED WRLS" ProductPrice={getSampleCurrencyFormat()} />
                                 </div> */}
 
-                        {/* <div className="col-md-4">
+                            {/* <div className="col-md-4">
                                     <div className="accessoriesproductbox text-decoration-Browse-more">
                                         <img src={accessoriesproductaddmore} className="img-fluid" alt="" />
                                         <div className="addmore">
@@ -68,31 +77,32 @@ const AccessoriesList = () => {
                                         </div>
                                     </div>
                                 </div> */}
+                        </div>
                     </div>
-                </div>
 
-                {/* </div> */}
-                {/* </div> */}
-                {/* <!-- Desktop View Accessories section END --> */}
+                    {/* </div> */}
+                    {/* </div> */}
+                    {/* <!-- Desktop View Accessories section END --> */}
 
 
-                {/* <!-- Mobile View Accessories section --> */}
-                <div className="owl-carousel owl-theme circle-slider d-lg-none d-md-none">
-                    <Carousel>
-                        {accessories && accessories.map((accessory, index) =>
-                            <Carousel.Item key={index}>
-                                <div className="item">
-                                    <AccessoriesSectionCard PrductImg={accessory.image.url} ProductDetail={accessory.name} ProductPrice={getSampleCurrencyFormat(accessory.price_range.minimum_price.regular_price.currency, accessory.price_range.minimum_price.regular_price.value)} />
+                    {/* <!-- Mobile View Accessories section --> */}
+                    <div className="owl-carousel owl-theme circle-slider d-lg-none d-md-none">
+                        <Carousel>
+                            {accessories && accessories.map((accessory, index) =>
+                                <Carousel.Item key={index}>
+                                    <div className="item">
+                                        <AccessoriesSectionCard PrductImg={accessory.image.url} ProductDetail={accessory.name} ProductPrice={getSampleCurrencyFormat(accessory.price_range.minimum_price.regular_price.currency, accessory.price_range.minimum_price.regular_price.value)} />
 
-                                </div>
-                            </Carousel.Item>
-                        )}
+                                    </div>
+                                </Carousel.Item>
+                            )}
 
-                    </Carousel>
-                </div>
-                {/* <!-- Mobile View Accessories section END --> */}
-            </section>
-        </div>
+                        </Carousel>
+                    </div>
+                    {/* <!-- Mobile View Accessories section END --> */}
+                </section>
+            </div>
+        </>
     )
 }
 export default AccessoriesList;

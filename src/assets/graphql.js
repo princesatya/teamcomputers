@@ -529,6 +529,9 @@ query ($sku: String!){
       related_products {
         uid
         name
+        image{
+          url
+        }
       }
       upsell_products {
         uid
@@ -638,6 +641,7 @@ query ($sku: String!){
             id
             name
             sku
+            uid
             attribute_set_id
             ... on PhysicalProductInterface {
               weight
@@ -1412,27 +1416,40 @@ query{
      }  }}
 `
 export const GET_COMPARE_LIST = gql`
-query {
+query ($uid : ID!){
   compareList(
-      uid: "psf7qCOoFvLz34bqc3Zyz3xP8khDiQKk"
-  ) {
-      uid
-      item_count
-      attributes {
-          code
-          label
-      }
-      items {
-          uid
-          product {
-              sku
-              name
-              description {
-                  html
-              }
-          }
-      }
-  }
+      uid: $uid
+      ) {
+        uid
+        item_count
+        attributes {
+            code
+            label
+        }
+        items {
+            uid
+            product {
+                sku
+                name
+                image{
+                  url
+                }
+                color
+                connectivity
+                size
+              
+                storage
+                short_description {
+                    html
+                }
+                description {
+                    html
+                }
+                
+
+            }
+        }
+    }
 }
 
 
@@ -1455,6 +1472,9 @@ mutation ( $products:[ID!]){
           product {
               sku
               name
+              image{
+                url
+              }
               description {
                   html
               }
@@ -1554,6 +1574,8 @@ export const GET_ADDRESS_LIST = gql`
       country_code
       telephone
       company
+      default_shipping
+      default_billing
     }
   }
 }
@@ -1668,44 +1690,59 @@ mutation (
 
 `
 export const UPDATE_CUSTOMER_ADDRESS = gql`
-mutation ( $id:Int!, $postcode: String!, $city:String!, $firstname: String!, $lastname: String!  ){
+mutation ( $id:Int!, $postcode: String!, $street: [String]!, $city:String!, $firstname: String!, $lastname: String!, $telephone: String!  ){
   updateCustomerAddress(id:$id, input: {
     firstname: $firstname
     lastname: $lastname
     city: $city
+    street: $street
     postcode: $postcode
+    telephone: $telephone
   }) {
     id
     city
     postcode
+    street
   }
 }
 
 `
+// export const CUSTOMER_ORDER_LIST = gql`
+// query {
+//   customer {
+//     orders(
+//       pageSize: 20
+//     ) {
+//       items {
+//         id
+//         order_date
+//         order_number
+//         total {
+//           grand_total {
+//             value
+//             currency
+//           }
+//         }
+//         status
+//       }
+//     }
+//   }
+// }
+// `
+
 export const CUSTOMER_ORDER_LIST = gql`
 query {
-  customer {
-    orders(
-      pageSize: 20
-    ) {
-      items {
-        id
-        order_date
-        order_number
-        total {
-          grand_total {
-            value
-            currency
-          }
-        }
-        status
-      }
+  customerOrders {
+    items {
+      order_number
+      id
+      created_at
+      grand_total
+      status
     }
   }
 }
-
 `
-
 export const GET_ORDER_DETAILS = gql`
 query ($id: Int!){
   salesOrder (id: $id) {
@@ -2441,4 +2478,33 @@ Faqs(pageSize:1,
     updated_at
     }
 }
+`
+
+export const REMOVE_COMPARE_LIST = gql`
+mutation ($uid: ID! , $products:[ID]!) {
+  removeProductsFromCompareList(
+    input: {
+      uid: $uid,
+      products: $products
+    }
+  ) {
+    uid
+    item_count
+    attributes {
+      code
+      label
+    }
+    items {
+      uid
+      product {
+        sku
+        name
+        description {
+          html
+        }
+      }
+    }
+  }
+}
+
 `

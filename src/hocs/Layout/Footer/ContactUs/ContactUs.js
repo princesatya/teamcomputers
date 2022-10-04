@@ -171,7 +171,6 @@ const ContactUs = () => {
         return false;
     }
     const ContactUs = async() => {
-        //document.getElementById('name').focus()
         // isName()
         // isEmail()
         // isPhone()
@@ -274,15 +273,15 @@ const ContactUs = () => {
                                 <div>
                                     <div className="form-group">
                                         <input type="text" className="form-control" name="name" required="" placeholder="Full Name*" data-form-field="Name" value={fullname} onChange={(e) => setFullname(e.target.value)} id="name" onBlur={() => isName()} />
-                                        <span className="badge bg-danger m-1 p-1 rounded-pill" id="badge bg-danger m-1 p-1 rounded-pill">{fullnameError}</span>
+                                        <span className="text-left text-small col-md-12 color_red">{fullnameError}</span>
                                     </div>
                                     <div className="form-group">
                                         <input type="email" className="form-control" name="email" required="" placeholder="Email Address*" data-form-field="Email" value={email} onChange={(e) => setEmail(e.target.value)} id='emailid' onBlur={() => isEmail()} />
-                                        <span className="badge bg-danger m-1 p-1 rounded-pill">{emailError}</span>
+                                        <span className="text-left text-small col-md-12 color_red">{emailError}</span>
                                     </div>
                                     <div className="form-group">
                                         <input type="tel" className="form-control" name="phone" placeholder="Phone*" data-form-field="Phone Number*" value={phone} onChange={(e) => setPhone(e.target.value)} id='phoneno' onBlur={() => isPhone()} />
-                                        <span className="badge bg-danger m-1 p-1 rounded-pill">{phoneError}</span>
+                                        <span className="text-left text-small col-md-12 color_red">{phoneError}</span>
                                     </div>
 
                                     <div className="form-group">
@@ -294,7 +293,7 @@ const ContactUs = () => {
                                             <option value="1000-5000">1000-5000</option>
                                             <option value="5000+">5000+</option>
                                         </select>
-                                        <span className="badge bg-danger m-1 p-1 rounded-pill">{numberofempError}</span>
+                                        <span className="text-left text-small col-md-12 color_red">{numberofempError}</span>
                                     </div>
 
                                     <div className="form-group">
@@ -308,12 +307,12 @@ const ContactUs = () => {
                                             <option value="Infrastructure Managed Services">Infrastructure Managed Services</option>
                                             <option value="IT Financial Services">IT Financial Services</option>
                                         </select>
-                                        <span className="badge bg-danger m-1 p-1 rounded-pill">{solutionError}</span>
+                                        <span className="text-left text-small col-md-12 color_red">{solutionError}</span>
                                     </div>
 
                                     <div className="form-group">
                                         <textarea className="form-control" name="message" placeholder="Message" rows="7" data-form-field="Message" value={message} onChange={(e) => setMessage(e.target.value)} id='text' onBlur={() => isMessage()}></textarea>
-                                        <span className="badge bg-danger m-1 p-1 rounded-pill">{messageError}</span>
+                                        <span className="text-left text-small col-md-12 color_red">{messageError}</span>
                                     </div>
                                     <div>
                                         <button onClick={() => ContactUs()}>Submit</button>

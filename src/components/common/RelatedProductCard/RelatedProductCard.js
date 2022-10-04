@@ -96,6 +96,7 @@ const RelatedProductCard = ({ skuid, PrductImg, ProductDetail, ProductPrice,filt
             navigate('/login');
         }
     };
+    console.log('IMAGE - ', PrductImg);
     return (
         <>
             <div className="accessoriesproductbox">
@@ -109,7 +110,7 @@ const RelatedProductCard = ({ skuid, PrductImg, ProductDetail, ProductPrice,filt
                     <div style={{textAlign:"center"}}>
                     <a className="btn custombutton"
                     //  href={"/#/product-detail/" + skuid}
-                     ><i className="fas fa-shopping-cart"><FaEye /></i> Learn More</a>
+                     ><i className="fas fa-shopping-cart"><FaEye /></i> Know More</a>
                     </div>
                     {/* <button className="btn custombutton" onClick={()=>AddToCart()} disabled={step < FilterDatas.length - 1}><i className="fas fa-eye"><FaShoppingCart /></i> Add to Cart</button> */}
 

@@ -25,7 +25,7 @@ const AboutUsSection = () => {
                   </p>
 
 
-                  <a href="/#/about-us">Know More</a>
+                  <a href="/#/content/about-us">Know More</a>
                 </div>
               </>
             )}

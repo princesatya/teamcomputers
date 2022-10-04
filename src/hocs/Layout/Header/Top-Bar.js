@@ -1,5 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import "../../../assets/css/topbar.css";
+import "../../../assets/css/style.css"
+import "../../../assets/css/custom.css"
+import "../../../assets/css/slider.css"
+import "../../../assets/css/homepageproduct.css"
 import familysetup from "../../../assets/img/product/familysetup.jpg"
 import teamlogo from "../../../assets/img/teamlogo.png"
 import CardItem from "../../../components/common/Card-Item/Card-Item";
@@ -20,13 +24,14 @@ import { SEARCH } from "../../../assets/graphql";
 import { apiHandler } from '../../../api';
 import { endpoint } from '../../../api/endpoint';
 import SearchList from '../../../components/common/SearchList/SearchList';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Header = () => {
   const [leftMenuState, setLeftMenuState] = useState('');
   const [showSearch, setShowSearch] = useState(false);
   const [searchParam, setSearchParam] = useState("");
   const [searchList, setSearchList] = useState("");
+  const [showbag, setShowBag] = useState(false);
   const leftAboutMenu = useRef();
   const rightContent = useRef();
   const dispatch = useDispatch();
@@ -54,8 +59,8 @@ const Header = () => {
       toast.error('Enter valid input to search');
     }
     else {
-      setShowSearch(false);
-      navigate('/search?q=' + searchParam);
+    setShowSearch(false);
+    navigate('/search?q=' + searchParam);
     }
   };
 
@@ -97,6 +102,11 @@ const Header = () => {
       searchResult();
     }
   };
+  const authenticate = () => {
+    if (!token) {
+      toast.error("Please Login");
+    }
+  }
   return (
     <>
       <header className="header header-absolute ">
@@ -109,16 +119,17 @@ const Header = () => {
                   <li className="list-inline-item pe-3 me-0 ">
                     <i className="fa fa-envelope"><FaEnvelope /> {" "}</i>
 
-                    <a className="parent-header-link-style" href="mailto:customercare@teamcomputers.com">
+                    <a className="parent-header-link-style" href={"mailto:" + storeconfig.support_email}>
                       {storeconfig.support_email}
 
                     </a>
                   </li>
 
-                  <li className="list-inline-item px-3 border-start d-none d-lg-inline-block">
+                  <li className="list-inline-item px-3 border-start d-none d-lg-inline-block" >
                     <i className="fa fa-phone-volume"> <FaPhoneVolume /></i>
-
-                    {storeconfig.support_phone}
+                    <a className="parent-header-link-style" href={"tel:" + storeconfig.support_phone}>
+                      {storeconfig.support_phone}
+                    </a>
                   </li>
                   {/* )} */}
 
@@ -128,7 +139,7 @@ const Header = () => {
                 {token && token !== "" ? (
                   <>
 
-                    <div className="dropdown">
+                    <div class="dropdown">
                       <div>
                         <a href="" style={{ marginRight: "10px" }}>Hi,
                           {/* {userData.email && userData.email.split("@")[0]} */}
@@ -137,7 +148,7 @@ const Header = () => {
                           <span className='dropdownicon'><AiOutlineCaretDown /></span>
                         </a>
                       </div>
-                      <div className="dropdown-content" id="navbarCollapse">
+                      <div class="dropdown-content" id="navbarCollapse">
                         <a href="/#/dashboard"> My Account</a>
                         <a href="/#/account-information"> Edit Profile</a>
                         <a href="/#/order-listing"> Order</a>
@@ -146,7 +157,9 @@ const Header = () => {
                     <a href="" onClick={() => logout()}>Logout</a>
                   </>
                 ) : (
-                  <a href="/#/login"> <i className="fa fa-user"><FaUser /> </i> Login</a>
+                  <>
+                    {/* <a href="/#/login"> <i className="fa fa-user"><FaUser /> </i> Login</a> */}
+                  </>
                 )}
               </div>
             </div>
@@ -163,7 +176,7 @@ const Header = () => {
           }>
           <div className="container">
             {/* <!-- Navbar Header  --> */}
-            <button className="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <button onClick={() => authenticate()} className="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
               <FaBars />
             </button>
             <a className="navbar-brand" href="/#/home"> <img src={teamlogo} alt="Team Computers Logo" /></a>
@@ -173,14 +186,16 @@ const Header = () => {
             <div className="collapse navbar-collapse" id="navbarCollapse">
               <ul className="navbar-nav mx-auto">
                 {categories && categories.map((category, index) =>
-                  <li key={index} className="nav-item"><a className="nav-link" href={category.name == "Watch" ? "/#/category-list/" + category.url_key : "/#/product-list/" + category.url_key}>{category.name}</a></li>
+                  <li key={index} className="nav-item"
+                    onClick={() => authenticate()}
+                  >
+                    <a className="nav-link" href={category.name == "Watch" ? "/#/category-list/" + category.url_key : category.name == "Accessories" ? "/#/category-list/" + category.url_key : "/#/product-list/" + category.url_key}>{category.name}</a></li>
                 )}
 
                 <li className="nav-item d-lg-none">
                   {token && token !== "" ? (
                     <>
-
-                      <div className="dropdown" style={{ width: "100%" }}>
+                      <div class="dropdown" style={{ width: "100%" }}>
                         <div>
                           <a className="nav-link" >Hi,
                             {/* {userData.email && userData.email.split("@")[0]} */}
@@ -188,7 +203,7 @@ const Header = () => {
                             <span className='dropdownicon'><AiOutlineCaretDown /></span>
                           </a>
                         </div>
-                        <div className="dropdown-content" id="navbarCollapse">
+                        <div class="dropdown-content" id="navbarCollapse">
                           <a href="/#/dashboard"> My Account</a>
                           <a href="/#/account-information"> Edit Profile</a>
                           <a href=""> Order</a>
@@ -214,14 +229,14 @@ const Header = () => {
                 </>
               } */}
 
-              <div className="dropdown" style={{ width: "100%" }}>
+              <div class="dropdown" style={{ width: "100%" }}>
                 {/* {showSearch &&
                 <>
                   <div>  <input type="text" placeholder="Search.." value={searchItem} onChange={(e) => setSearchItem(e.target.value)} /></div>
 
                 </>
               } */}
-                {/* <div className="dropdown-content" >
+                {/* <div class="dropdown-content" >
                   {searchList && searchList.items && searchList.items.map((list, index) =>
                     <div>
                         <SearchList
@@ -231,16 +246,16 @@ const Header = () => {
                   )}
                 </div> */}
               </div>
-              <div className="nav-item"><a className="navbar-icon-link" href='/#/compare/'><FaBalanceScale style={{ fontSize: "1.5rem" }} /></a></div>
+              <div className="nav-item" onClick={() => authenticate()}><a className="navbar-icon-link" href='/#/compare/'><FaBalanceScale style={{ fontSize: "1.5rem" }} /></a></div>
               <div className="nav-item navbar-icon-link" data-bs-toggle="search" onClick={() => setShowSearch(true)}>
-                <FaSearch />
+                <FaSearch onClick={() => authenticate()} />
               </div>
 
 
 
 
               {/* <!-- User Not Logged - link to login page--> */}
-              <div className="nav-item"><a className="navbar-icon-link" href="/#/wish-list">
+              <div className="nav-item" onClick={() => authenticate()}><a className="navbar-icon-link" href="/#/wish-list">
                 <FaHeart /></a>
               </div>
               {/* <!-- Cart Dropdown--> */}
@@ -248,13 +263,14 @@ const Header = () => {
 
                 <span className="text-sm ms-2 ms-lg-0 text-uppercase text-sm fw-bold d-none d-lg-none">View cart</span></a>
 
-                <div><a className="navbar-icon-link" id="cartdetails" href="" data-bs-target="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <FaShoppingBag />
-                  <div className="navbar-icon-link-badge">{getTotalCartItem()} </div>
-                </a>
+                <div onClick={() => setShowBag(true)}>
+                  <a className={showbag?"navbar-icon-link ":"navbar-icon-link show"} id="cartdetails" href="" data-bs-target="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded={showbag?"false":"true"}>
+                    <FaShoppingBag onClick={() => authenticate()} />
+                    <div className="navbar-icon-link-badge">{getTotalCartItem()} </div>
+                  </a>
 
 
-                  <div className="dropdown-menu dropdown-menu-animated dropdown-menu-end p-4" aria-labelledby="">
+                  <div className={showbag ? "dropdown-menu dropdown-menu-animated dropdown-menu-end p-4 show" : "dropdown-menu dropdown-menu-animated dropdown-menu-end p-4"} aria-labelledby="">
                     <div className="navbar-cart-product-wrapper">
                       {/* <!-- cart item--> */}
                       {addtoproductcart && addtoproductcart.map((cartitem, index) =>

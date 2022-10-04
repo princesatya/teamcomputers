@@ -162,8 +162,13 @@ const ProductDetail = () => {
       if (categories) {
         list.push({ name: 'Home', url: '/#/home' });
         categories && categories.forEach((cat) => {
-          list.push({ name: cat.name, url: '/#/product-list/' + cat.url_key });
+          if(cat.name=="Accessories" || cat.name=="Watch"){
+          list.push({ name: cat.name, url: '/#/category-list/' + cat.url_key });
           console.log(cat.name);
+          }else{
+            list.push({ name: cat.name, url: '/#/product-list/' + cat.url_key });
+          console.log(cat.name); 
+          }
         });
         list.push({ name: productDetails[0].name, url: '' });
         console.log( productDetails[0].name);
@@ -202,12 +207,12 @@ const ProductDetail = () => {
                 </div>
               </div>
             </div>
-            <div className="row">
+            <div className="row ">
               {productDetails && productDetails[0] && productDetails[0].related_products && productDetails[0].related_products.map((item, index) =>
-                <div className="col-md-4" key={index}>
+                <div className="col-md-4" style={{marginBottom:"20px"}} key={index}>
                   <RelatedProductCard
                     // skuid={product.sku}
-                    // PrductImg={product.image.url}
+                    PrductImg={item.image.url }
                     ProductDetail={item.name}
                   // filterData={filter} selectedFilterUid={selectedFilterUid} step={step}
                   // ProductPrice={getSampleCurrencyFormat(product.price_range.minimum_price && product.price_range.minimum_price.final_price && product.price_range.minimum_price.final_price.currency ? product.price_range.minimum_price.final_price.currency : "INR", product.price_range.minimum_price && product.price_range.minimum_price.final_price && product.price_range.minimum_price.final_price.value ? product.price_range.minimum_price.final_price.value : 0)}

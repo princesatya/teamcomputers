@@ -1,6 +1,6 @@
 
 import React, { useEffect } from 'react';
-import { Route, BrowserRouter, HashRouter, Routes } from 'react-router-dom';
+import { Route, Navigate, BrowserRouter, HashRouter, Routes } from 'react-router-dom';
 import Layout from './hocs/Layout/index';
 import HomePage from './containers/Home-Page/HomePage';
 import ProductDetail from './containers/Product-Detail/ProductDetail';
@@ -37,7 +37,9 @@ import BlogDetail from "./hocs/Layout/Footer/BlogDetailPage/blogDetail";
 import ContactUs from "./hocs/Layout/Footer/ContactUs/ContactUs";
 import ScrollToTop from "./hocs/Layout/ScrollToTop";
 import Search from "./containers/Search/Search";
-import FAQs from './hocs/Layout/Footer/Faq/Faqs'
+import FAQs from './hocs/Layout/Footer/Faq/Faqs';
+import Thankyou from "./components/common/ThankYou/ThankYou"
+
 
 toast.configure({
   hideProgressBar: false,
@@ -87,8 +89,11 @@ const App = () => {
               <Route exact path="/contact-us" element={<ContactUs />} />
               <Route exact path="/search" element={<Search />} />
               <Route exact path="/faqs" element={<FAQs />} />
+              <Route exact path="/thank-you" element={<Thankyou />} />
+           
             </Route>
             <Route exact path="/login" element={<Login />} />
+            <Route path="*" element={<Navigate to="/login" replace />} />
           </Routes>
         </Layout>
       </HashRouter>

@@ -30,9 +30,10 @@ const WishlistSectionCard = ({ ids, sku, wishlist_img, ProductName, final_price,
 
     const dispatch = useDispatch();
     const { token } = useSelector((state) => state.login);
-    const { addtoproductcart, wishlist,productDetails } = useSelector(
+    const { addtoproductcart, wishlist, productDetails } = useSelector(
         (state) => state.home
     );
+    // console.log(wishlist);
     const [filter, setFilter] = useState([]);
     const AddToCart = async () => {
         if (token) {
@@ -49,7 +50,7 @@ const WishlistSectionCard = ({ ids, sku, wishlist_img, ProductName, final_price,
 
             if (!customerresult.data.error_code) {
                 dispatch(savecustomerresult(customerresult.data.customerCart));
-             
+
             }
             const result = await apiHandler({
                 url: endpoint.GRAPHQL_URL,
@@ -82,7 +83,7 @@ const WishlistSectionCard = ({ ids, sku, wishlist_img, ProductName, final_price,
             navigate('/login');
         }
     };
-    
+
     // useEffect(() => {
 
     //     if (productDetails && productDetails[0] && productDetails[0].id) {
@@ -101,13 +102,13 @@ const WishlistSectionCard = ({ ids, sku, wishlist_img, ProductName, final_price,
     //           options: conf_options
     //         };
     //       });
-    
+
     //       setFilter(filterOptions);
     //     }
     //   }, [productDetails])
 
     const RemoveWishlist = async (ids) => {
-       
+
         if (token) {
             const result = await apiHandler({
                 url: endpoint.GRAPHQL_URL,
@@ -122,6 +123,7 @@ const WishlistSectionCard = ({ ids, sku, wishlist_img, ProductName, final_price,
                     "query": REMOVE_PRODUCT_FROM_WISHLIST
                 },
             });
+            console.log(result);
             if (!result.data.status) {
                 toast.success('Delete Successfull');
                 getWishListData();
@@ -144,7 +146,7 @@ const WishlistSectionCard = ({ ids, sku, wishlist_img, ProductName, final_price,
         });
         if (!wishlistresult.data.error_code) {
             dispatch(savewishlist(wishlistresult.data.wishlist));
-            
+
         }
     };
     return (

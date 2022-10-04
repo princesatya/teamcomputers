@@ -11,6 +11,11 @@ import AddressModal from '../../components/common/Checkout-Page/AddressModal';
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import MyAccountMenu from '../../components/common/MyAccountMenu/MyAccountMenu';
+import mydashboard from "../../assets/img/account/mydashboard.png";
+import accountinformation from "../../assets/img/account/accountinformation.png";
+import myorders from "../../assets/img/account/myorders.png";
+import addressbook from "../../assets/img/account/addressbook.png";
+import mywishlist from "../../assets/img/account/mywishlist.png";
 
 
 const AddressBook = () => {
@@ -57,7 +62,7 @@ const AddressBook = () => {
                 // User Data is updated sucessfullly
                 toast.success('User Data is updated sucessfullly');
                 GetAddressList();
-                navigate('/dashboard');
+                // navigate('/dashboard');
             } else {
                 // Error in updating User Data
                 toast.error(result.data.message);
@@ -205,11 +210,11 @@ const AddressBook = () => {
                                 </div>
                                 <div className="dashboardmenu">
                                     <ul>
-                                        <li><a href="/#/dashboard"><img src="img/mydashboard.png" alt="" /> My Dashboard</a></li>
-                                        <li><a href="/#/account-information"><img src="img/accountinformation.png" alt="" />Account Information</a></li>
-                                        <li><a href="/#/order-listing"><img src="img/myorders.png" alt="" /> My Orders</a></li>
-                                        <li className="active"><a href="/#/address-book"><img src="img/addressbook.png" alt="" /> Address Book</a></li>
-                                        <li><a href="/#/my-wish-list"><img src="img/mywishlist.png" alt="" /> My Wishlist</a></li>
+                                        <li><a href="/#/dashboard"><img src={mydashboard} alt="" /> My Dashboard</a></li>
+                                        <li><a href="/#/account-information"><img src={accountinformation} alt="" />Account Information</a></li>
+                                        <li><a href="/#/order-listing"><img src={myorders} alt="" /> My Orders</a></li>
+                                        <li className="active"><a href="/#/address-book"><img src={addressbook} alt="" /> Address Book</a></li>
+                                        <li><a href="/#/my-wish-list"><img src={mywishlist} alt="" /> My Wishlist</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -233,9 +238,14 @@ const AddressBook = () => {
                                                     <div onClick={() => showModal(address)} style={{ cursor: "pointer" }}>
                                                         <a data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</a>
                                                     </div>
-                                                    <div onClick={() => RemoveAddress(address.id)} style={{ cursor: "pointer" }}>
-                                                        <a style={{ cursor: "pointer" }}>Remove</a>
-                                                    </div>
+                                                    {!(address.default_billing || address.default_shipping) && (
+                                                        <div onClick={() => RemoveAddress(address.id)} style={{ cursor: "pointer" }} className={index==0?"d-none":""}>
+                                                            <a style={{ cursor: "pointer" }}>Remove</a>
+                                                        </div>
+                                                    )}
+                                                    {/* </>
+                                                    )} */}
+
                                                 </div>
                                             </div>
                                         </div>
@@ -262,7 +272,6 @@ const AddressBook = () => {
                         closeModal={closeAddressModal} />}
             </section>
             {/* <Modal /> */}
-            <ToastContainer/>
         </>
     )
 }

@@ -35,7 +35,7 @@ const ProductDetailFilter = ({ filterData, handleFilterChange, selectedFilter, o
     return (
         <>
             <div className="customfilter d-none d-md-block d-lg-block product-custom-filter">
-                <h4 className="d-flex align-items-center"><img src={filter} className="pe-2" /> Filters</h4>
+                <h4 className="d-flex align-items-center"><img src={filter} className="pe-2" /> Variant</h4>
                 <div className="accordion pt-2 pe-5" id="accordionExample">
                     {FilterDatas && FilterDatas.sort((a, b) => a.position - b.position).map((filters, index) => {
                         console.log('DATA - ', filters);

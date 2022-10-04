@@ -44,7 +44,6 @@ const Checkoutform = () => {
         query: CHECK_PAYMENT_STATUS,
       },
     });
-    setLoader(false);
     console.log(result);
     if (
       result &&
@@ -54,12 +53,13 @@ const Checkoutform = () => {
     ) {
       getOrderPlace(result.data.checkpaymentstatus.transaction_id);
     } else {
+      setLoader(false);
       toast.error('There is error in payment');
       setMessage('There is error in payment');
     }
   };
   const getOrderPlace = async (transaction_id) => {
-    setLoader(true);
+    // setLoader(true);
     const result = await apiHandler({
       url: endpoint.GRAPHQL_URL,
       authToken: token,
@@ -70,17 +70,19 @@ const Checkoutform = () => {
         query: PLACE_ORDER,
       },
     });
-    setLoader(false);
+    // setLoader(false);
     console.log(result.data);
     if (result.data.placeOrder) {
       updateOrderToCart(
         result.data.placeOrder.order.order_number,
         transaction_id
       );
+    } else {
+      setLoader(false);
     }
   };
   const updateOrderToCart = async (order_id, transaction_id) => {
-    setLoader(true);
+    // setLoader(true);
     const result = await apiHandler({
       url: endpoint.GRAPHQL_URL,
       authToken: token,
@@ -97,31 +99,34 @@ const Checkoutform = () => {
       },
 
     });
-    setLoader(false);
+    // setLoader(false);
     console.log(result.data);
     if (result.data.updatePaymentInformation) {
       dispatch(saveOrderItems(result.data.updatePaymentInformation.response));
       getCustomerCartDetails();
+    } else {
+      setLoader(false);
     }
   };
   const getCustomerCartDetails = async () => {
-    if (token) {
-      setLoader(true);
-      const customerresult = await apiHandler({
-        url: endpoint.GRAPHQL_URL,
-        method: 'POST',
-        authToken: token,
-        data: {
-          base_url: endpoint.API_BASE_URL,
-          query: CUSTOMER_CART,
-          variables: {},
-        },
-      });
+    // setLoader(true);
+    const customerresult = await apiHandler({
+      url: endpoint.GRAPHQL_URL,
+      method: 'POST',
+      authToken: token,
+      data: {
+        base_url: endpoint.API_BASE_URL,
+        query: CUSTOMER_CART,
+        variables: {},
+      },
+    });
+    
+    if (!customerresult.data.error_code) {
+      dispatch(savecustomerresult(customerresult.data.customerCart));
+      navigate('/thank-you');
+    }
+    else{
       setLoader(false);
-      if (!customerresult.data.error_code) {
-        dispatch(savecustomerresult(customerresult.data.customerCart));
-        navigate('/order-listing');
-      }
     }
   };
   useEffect(() => {
@@ -149,9 +154,6 @@ const Checkoutform = () => {
       {loader && (
         <div className='loading-overlay'>
           <div className='bounce-loader'>
-            {/* <div className='bounce1'></div>
-								<div className='bounce2'></div>
-								<div className='bounce3'></div> */}
             <div className="loader"></div>
           </div>
         </div>

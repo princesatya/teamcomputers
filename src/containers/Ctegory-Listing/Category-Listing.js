@@ -196,8 +196,8 @@ const CategoryList = () => {
                 <Breadcrumb data={getBreadCrumbData()} />
             </section>
 
-            <section>
-                <img src={selectedCategory?.image || null} className="img-fluid" style={{ width: "100%", height: "200px" }} />
+            <section class="innertopbanner" style={{backgroundColor:"#fff"}}>
+                <img src={selectedCategory?.image || null} className="img-fluid" style={{ width: "auto", height: "100%" }} />
             </section>
             <section className="pt-5 pb-5 leftsidebar">
                 <div className="container">

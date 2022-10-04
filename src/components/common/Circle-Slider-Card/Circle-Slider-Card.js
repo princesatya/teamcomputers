@@ -32,6 +32,7 @@ const CircleSliderCard = ({ ProductName, ProductDescription, circlesliderImg, Kn
     }
     const redirectTo = (url) => {
         window.location.href = url;
+        console.log(url)
     }
 
     return (

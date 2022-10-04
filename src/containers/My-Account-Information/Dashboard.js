@@ -8,6 +8,11 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useSelector, useDispatch } from 'react-redux';
 import MyAccountMenu from '../../components/common/MyAccountMenu/MyAccountMenu';
 import { useNavigate } from "react-router-dom";
+import mydashboard from "../../assets/img/account/mydashboard.png";
+import accountinformation from "../../assets/img/account/accountinformation.png";
+import myorders from "../../assets/img/account/myorders.png";
+import addressbook from "../../assets/img/account/addressbook.png";
+import mywishlist from "../../assets/img/account/mywishlist.png";
 
 
 const Dashboard = () => {
@@ -76,11 +81,11 @@ const Dashboard = () => {
                               
                                 <div className="dashboardmenu">
                                     <ul>
-                                        <li className="active"><a href="/#/dashboard"><img src="img/mydashboard.png" alt="" /> My Dashboard</a></li>
-                                        <li><a href="/#/account-information"><img src="img/accountinformation.png" alt="" /> Account Information</a></li>
-                                        <li><a href="/#/order-listing"><img src="img/myorders.png" alt="" /> My Orders</a></li>
-                                        <li><a href="/#/address-book"><img src="img/addressbook.png" alt="" /> Address Book</a></li>
-                                        <li><a href="/#/my-wish-list"><img src="img/mywishlist.png" alt="" /> My Wishlist</a></li>
+                                        <li className="active"><a href="/#/dashboard"><img src={mydashboard} alt="" /> My Dashboard</a></li>
+                                        <li><a href="/#/account-information"><img src={accountinformation} alt="" /> Account Information</a></li>
+                                        <li><a href="/#/order-listing"><img src={myorders} alt="" /> My Orders</a></li>
+                                        <li><a href="/#/address-book"><img src={addressbook} alt="" /> Address Book</a></li>
+                                        <li><a href="/#/my-wish-list"><img src={mywishlist} alt="" /> My Wishlist</a></li>
                                     </ul>
                                 </div>
                             </div>

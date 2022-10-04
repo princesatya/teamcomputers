@@ -8,15 +8,70 @@ import { endpoint } from "../../api/endpoint";
 import { apiHandler } from "../../api";
 import { Token } from 'graphql';
 import { getSampleCurrencyFormat } from "../../utils/utils";
+import { useState } from 'react';
+
 
 
 const WishlistSection = () => {
-
-
+    const [ wishlistData, setWishlistData] = useState("");
+    const { token } = useSelector((state) => state.login);
+    
     const { wishlist } = useSelector(
         (state) => state.home
     );
-  
+
+    const dispatch = useDispatch();
+    // console.log(wishlist);
+    const getWishlist = async () => {
+        if (token) {
+            // setLoader(true);
+            const wishlistresult = await apiHandler({
+                url: endpoint.GRAPHQL_URL,
+                method: 'POST',
+                authToken: token,
+                data: {
+                    base_url: endpoint.API_BASE_URL,
+                    variables: {},
+                    query: GETWISHLIST,
+                },
+            });
+            if (!wishlistresult.data.error_code) {
+                dispatch(savewishlist(wishlistresult.data.wishlist));
+    
+            }
+            // setLoader(false);
+            // if (wishlistresult.data.wishlist) {
+            //     dispatch(savewishlist(wishlistresult.data.wishlist));
+            //     toast.success('Added Successfully');
+            //     console.log(wishlistresult.data.wishlist);
+
+            //     addtocartwishlist(wishlistresult);
+            // }
+            // else {
+            //     toast.error(wishlistresult.data.message);
+            // }
+
+
+
+            // if (!result.data.message) {
+            //     dispatch(
+            //         saveaddproductwishlist(result.data.addProductsToWishlist.wishlist.items_v2.items)
+
+            //     );
+            //     toast.success('Added Successfully');
+            // }
+            // else {
+            //     toast.error(result.data.message);
+            // }
+
+        } 
+        // else {
+        //     navigate('/login');
+        // }
+    };
+    useEffect(() => {
+        getWishlist()
+      }, []);
 
     return (
         <>
@@ -42,22 +97,22 @@ const WishlistSection = () => {
 
 
                     <div className="row">
-                        {wishlist && wishlist.items && wishlist.items.map((wishlistdata, index) =>
+                        {wishlist && wishlist.items && wishlist.items.map((wishlistdatas, index) =>
                             <div className="col-lg-4" key={index}>
 
                                 <WishlistSectionCard
-                                    ids={wishlistdata.id}
-                                    sku={wishlistdata.product.sku}
-                                    ProductName={wishlistdata.product.name}
-                                    wishlist_img={wishlistdata.product.image.url ? wishlistdata.product.image.url : ""}
-                                    final_price={getSampleCurrencyFormat(wishlistdata.product.price_range.minimum_price.final_price.currency, wishlistdata.product.price_range.minimum_price.final_price.value)}
-                                //  Amount={wishlistdata.Amount?wishlistdata.Amount:""} 
+                                    ids={wishlistdatas.id}
+                                    sku={wishlistdatas.product.sku}
+                                    ProductName={wishlistdatas.product.name}
+                                    wishlist_img={wishlistdatas.product.image.url ? wishlistdatas.product.image.url : ""}
+                                    final_price={getSampleCurrencyFormat(wishlistdatas.product.price_range.minimum_price.final_price.currency, wishlistdatas.product.price_range.minimum_price.final_price.value)}
+                                //  Amount={wishlistdatas.Amount?wishlistdatas.Amount:""} 
 
-                                //  Discount={wishlistdata.Discount?wishlistdata.Discount:""} 
+                                //  Discount={wishlistdatas.Discount?wishlistdatas.Discount:""} 
                                 />
                             </div>
                         )}
-                  
+
                     </div>
 
                 </div>

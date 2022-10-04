@@ -3,9 +3,12 @@ import "../../../assets/css/footer.css"
 import teamfooterlogo from "../../../assets/img/teamfooterlogo.png";
 import { FaMapMarkerAlt, FaAddressCard, FaPhoneVolume, FaEnvelope, FaAngleDoubleRight, FaFacebookSquare, FaTwitter, FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Footer = ({ urlKey }) => {
-
+  const { token } = useSelector(
+    (state) => state.login
+  );
   const { categories, storeconfig } = useSelector(
     (state) => state.home
   );
@@ -13,7 +16,11 @@ const Footer = ({ urlKey }) => {
     // 👇️ scroll to top on page load
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   }, []);
-
+  const authenticate = () => {
+    if (!token) {
+      toast.error("Please Login");
+    }
+  }
   return (
     <>
       <footer className="main-footer">
@@ -26,17 +33,17 @@ const Footer = ({ urlKey }) => {
                 <ul className="contactInfo text-decoration-mail-footer">
                   <li><i className="fas fa-map-marker-alt"><FaMapMarkerAlt /></i> No.1, Mohammadpur, Bhikaji Cama Place New Delhi – 110066, India</li>
                   <li><i className="fas fa-address-card"><FaAddressCard /></i> CIN: U74899DL1987PTC028384</li>
-                  <li><i className="fas fa-phone-volume"><FaPhoneVolume /></i> {storeconfig.support_phone}</li>
-                  <li><i className="fas fa-envelope"><FaEnvelope /></i> <a href="mailto:customercare@teamcomputers.com"> {storeconfig.support_email}</a></li>
+                  <li><i className="fas fa-phone-volume"><FaPhoneVolume /></i> <a href={"tel:" + storeconfig.support_phone}> {storeconfig.support_phone}</a></li>
+                  <li><i className="fas fa-envelope"><FaEnvelope /></i> <a href={"mailto:" + storeconfig.support_email}>{storeconfig.support_email}</a></li>
                 </ul>
 
                 <h6 className="mb-3">Stay in Touch</h6>
                 <ul className="list-inline">
-                  <li className="list-inline-item" ><a className="text-muted text-primary-hover" href="https://www.facebook.com/ConnectwithTeam" target="_blank" title="facebook"><i className="fab fa-facebook"><FaFacebookSquare /></i></a></li>
-                  <li className="list-inline-item"><a className="text-muted text-primary-hover" href="#" target="_blank" title="twitter"><i className="fab fa-twitter"></i><FaTwitter /></a></li>
-                  <li className="list-inline-item"><a className="text-muted text-primary-hover" href="https://www.instagram.com/teamcomputers/" target="_blank" title="instagram"><i className="fab fa-instagram"></i><FaInstagram /></a></li>
-                  <li className="list-inline-item"><a className="text-muted text-primary-hover" href="https://www.linkedin.com/company/team-computers/" target="_blank" title="linkedin"><i className="fab fa-linkedin"></i><FaLinkedin /></a></li>
-                  <li className="list-inline-item"><a className="text-muted text-primary-hover" href="https://www.youtube.com/user/TeamComputersChannel" target="_blank" title="youtube"><i className="fab fa-youtube"></i><FaYoutube /></a></li>
+                  <li className="list-inline-item"  ><a className="text-muted text-primary-hover" href="https://www.facebook.com/ConnectwithTeam" target="_blank" title="facebook"><i className="fab fa-facebook"><FaFacebookSquare /></i></a></li>
+                  <li className="list-inline-item" ><a className="text-muted text-primary-hover" href="#" target="_blank" title="twitter"><i className="fab fa-twitter"></i><FaTwitter /></a></li>
+                  <li className="list-inline-item" ><a className="text-muted text-primary-hover" href="https://www.instagram.com/teamcomputers/" target="_blank" title="instagram"><i className="fab fa-instagram"></i><FaInstagram /></a></li>
+                  <li className="list-inline-item" ><a className="text-muted text-primary-hover" href="https://www.linkedin.com/company/team-computers/" target="_blank" title="linkedin"><i className="fab fa-linkedin"></i><FaLinkedin /></a></li>
+                  <li className="list-inline-item" ><a className="text-muted text-primary-hover" href="https://www.youtube.com/user/TeamComputersChannel" target="_blank" title="youtube"><i className="fab fa-youtube"></i><FaYoutube /></a></li>
 
                 </ul>
               </div>
@@ -47,7 +54,7 @@ const Footer = ({ urlKey }) => {
                     <h6 className="mb-3">Products</h6>
                     <ul className="list-unstyled">
                       {categories && categories.map((category, index) =>
-                        <li key={index}><span className="footer-right-icon"><FaAngleDoubleRight /></span> <a href={category.name == "Watch" ? "/#/category-list/" + category.url_key : "/#/product-list/" + category.url_key}>{category.name}</a></li>
+                        <li key={index} onClick={() => authenticate()}><span className="footer-right-icon"><FaAngleDoubleRight /></span> <a href={category.name == "Watch" ? "/#/category-list/" + category.url_key : category.name == "Accessories" ? "/#/category-list/" + category.url_key : "/#/product-list/" + category.url_key}>{category.name}</a></li>
                       )}
                       {/* <li><span className="footer-right-icon"><FaAngleDoubleRight/></span> <a href={"/#/product-list/" + urlKey}>iPad</a></li>
                       <li><span className="footer-right-icon"><FaAngleDoubleRight/></span> <a href={"/#/product-list/" + urlKey}>iPhone</a></li>
@@ -62,36 +69,20 @@ const Footer = ({ urlKey }) => {
                   </div>
                   <div className="col-lg-4 col-md-6 mb-5 mb-lg-0">
                     <h6 className="mb-3">Service & Support</h6>
-                    <ul className="list-unstyled">
-                      <li onClick={() => {
-                        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-                      }}><span className="footer-right-icon" ><FaAngleDoubleRight /></span> <a href="/#/content/shipping-policy">Shipping Policy</a></li>
-                      <li onClick={() => {
-                        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-                      }}><span className="footer-right-icon"><FaAngleDoubleRight /></span> <a href="/#/content/privacy-policy">Privacy Policy</a></li>
-                      <li onClick={() => {
-                        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-                      }}><span className="footer-right-icon"><FaAngleDoubleRight /></span> <a href="/#/content/disclaimer">Disclaimer</a></li>
-                      <li onClick={() => {
-                        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-                      }}><span className="footer-right-icon"><FaAngleDoubleRight /></span> <a href="/#/content/terms-of-use">Terms of Use</a></li>
+                    <ul className="list-unstyled" >
+                      <li onClick={() => authenticate()}><span className="footer-right-icon" ><FaAngleDoubleRight /></span> <a href="/#/content/shipping-policy">Shipping Policy</a></li>
+                      <li onClick={() => authenticate()}><span className="footer-right-icon"><FaAngleDoubleRight /></span> <a href="/#/content/privacy-policy">Privacy Policy</a></li>
+                      <li onClick={() => authenticate()}><span className="footer-right-icon"><FaAngleDoubleRight /></span> <a href="/#/content/disclaimer">Disclaimer</a></li>
+                      <li onClick={() => authenticate()}><span className="footer-right-icon"><FaAngleDoubleRight /></span> <a href="/#/content/terms-of-use">Terms of Use</a></li>
                     </ul>
                   </div>
                   <div className="col-lg-4 col-md-6 mb-5 mb-lg-0">
                     <h6 className="mb-3">About</h6>
                     <ul className="list-unstyled">
-                      <li onClick={() => {
-                        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-                      }}><span className="footer-right-icon" ><FaAngleDoubleRight /></span> <a href="/#/content/about-us">About Us</a></li>
-                      <li onClick={() => {
-                        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-                      }}><span className="footer-right-icon" ><FaAngleDoubleRight /></span> <a href="/#/blog">Blog</a></li>
-                      <li onClick={() => {
-                        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-                      }}><span className="footer-right-icon" ><FaAngleDoubleRight /></span> <a href="/#/contact-us">Contact Us</a></li>
-                      <li onClick={() => {
-                        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-                      }}><span className="footer-right-icon" ><FaAngleDoubleRight /></span> <a href="/#/faqs">FAQs</a></li>
+                      <li onClick={() => authenticate()}><span className="footer-right-icon" ><FaAngleDoubleRight /></span> <a href="/#/content/about-us">About Us</a></li>
+                      <li onClick={() => authenticate()}><span className="footer-right-icon" ><FaAngleDoubleRight /></span> <a href="/#/blog">Blog</a></li>
+                      <li onClick={() => authenticate()}><span className="footer-right-icon" ><FaAngleDoubleRight /></span> <a href="/#/contact-us">Contact Us</a></li>
+                      <li onClick={() => authenticate()}><span className="footer-right-icon" ><FaAngleDoubleRight /></span> <a href="/#/faqs">FAQs</a></li>
                     </ul>
                   </div>
                 </div>
@@ -112,8 +103,8 @@ const Footer = ({ urlKey }) => {
                     <ul className="contactInfo">
                       <li><i className="fas fa-map-marker-alt"><FaMapMarkerAlt /></i> No.1, Mohammadpur, Bhikaji Cama Place New Delhi – 110066, India</li>
                       <li><i className="fas fa-address-card"><FaAddressCard /></i> CIN: U74899DL1987PTC028384</li>
-                      <li><i className="fas fa-phone-volume"><FaPhoneVolume /></i> {storeconfig.support_phone}</li>
-                      <li><i className="fas fa-envelope"><FaEnvelope /></i> <a href="mailto:customercare@teamcomputers.com">{storeconfig.support_email}</a></li>
+                      <li><i className="fas fa-phone-volume"><FaPhoneVolume /></i><a href={"tel:" + storeconfig.support_phone}> {storeconfig.support_phone}</a></li>
+                      <li><i className="fas fa-envelope"><FaEnvelope /></i> <a href={"mailto:" + storeconfig.support_email}>{storeconfig.support_email}</a></li>
                     </ul>
 
                     <h6 className="mb-3">Stay in Touch</h6>
@@ -136,7 +127,7 @@ const Footer = ({ urlKey }) => {
                   <div className="card-body">
                     <ul className="list-unstyled">
                       {categories && categories.map((category, index) =>
-                        <li key={index}><span className="footer-right-icon"><FaAngleDoubleRight /></span> <a href={category.name == "Watch" ? "/#/category-list/" + category.url_key : "/#/product-list/" + category.url_key}>{category.name}</a></li>
+                        <li key={index} onClick={() => authenticate()}><span className="footer-right-icon"><FaAngleDoubleRight /></span> <a href={category.name == "Watch" ? "/#/category-list/" + category.url_key : category.name == "Accessories" ? "/#/category-list/" + category.url_key : "/#/product-list/" + category.url_key}>{category.name}</a></li>
                       )}
 
                     </ul>
@@ -152,18 +143,10 @@ const Footer = ({ urlKey }) => {
                   <div className="card-body">
                     <ul className="list-unstyled">
 
-                      <li onClick={() => {
-                        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-                      }}><span className="footer-right-icon" ><FaAngleDoubleRight /></span> <a href="/#/content/shipping-policy">Shipping Policy</a></li>
-                      <li onClick={() => {
-                        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-                      }}><span className="footer-right-icon" ><FaAngleDoubleRight /></span> <a href="/#/content/privacy-policy">Privacy Policy</a></li>
-                      <li onClick={() => {
-                        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-                      }}> <span className="footer-right-icon" ><FaAngleDoubleRight /></span><a href="/#/content/disclaimer">Disclaimer</a></li>
-                      <li onClick={() => {
-                        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-                      }}> <span className="footer-right-icon" ><FaAngleDoubleRight /></span><a href="/#/content/terms-of-use">Terms of Use</a></li>
+                      <li onClick={() => authenticate()}><span className="footer-right-icon" ><FaAngleDoubleRight /></span> <a href="/#/content/shipping-policy">Shipping Policy</a></li>
+                      <li onClick={() => authenticate()}><span className="footer-right-icon" ><FaAngleDoubleRight /></span> <a href="/#/content/privacy-policy">Privacy Policy</a></li>
+                      <li onClick={() => authenticate()}> <span className="footer-right-icon" ><FaAngleDoubleRight /></span><a href="/#/content/disclaimer">Disclaimer</a></li>
+                      <li onClick={() => authenticate()}> <span className="footer-right-icon" ><FaAngleDoubleRight /></span><a href="/#/content/terms-of-use">Terms of Use</a></li>
                     </ul>
                   </div>
                 </div>
@@ -176,18 +159,10 @@ const Footer = ({ urlKey }) => {
                 <div id="collapseFour" className="accordion-collapse collapse" data-bs-parent="#myAccordion">
                   <div className="card-body">
                     <ul className="list-unstyled">
-                      <li onClick={() => {
-                        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-                      }}><span className="footer-right-icon" ><FaAngleDoubleRight /></span> <a href="/#/content/about-us" >About Us</a></li>
-                      <li onClick={() => {
-                        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-                      }}> <span className="footer-right-icon" ><FaAngleDoubleRight /></span> <a href="/#/blog">Blog</a></li>
-                      <li onClick={() => {
-                        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-                      }}> <span className="footer-right-icon" ><FaAngleDoubleRight /></span><a href="/#/contact-us">Contact Us</a></li>
-                      <li onClick={() => {
-                        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-                      }}><span className="footer-right-icon" ><FaAngleDoubleRight /></span> <a href="/#/faqs">FAQs</a></li>
+                      <li onClick={() => authenticate()}><span className="footer-right-icon" ><FaAngleDoubleRight /></span> <a href="/#/content/about-us" >About Us</a></li>
+                      <li onClick={() => authenticate()}> <span className="footer-right-icon" ><FaAngleDoubleRight /></span> <a href="/#/blog">Blog</a></li>
+                      <li onClick={() => authenticate()}> <span className="footer-right-icon" ><FaAngleDoubleRight /></span><a href="/#/contact-us">Contact Us</a></li>
+                      <li onClick={() => authenticate()}><span className="footer-right-icon" ><FaAngleDoubleRight /></span> <a href="/#/faqs">FAQs</a></li>
                     </ul>
                   </div>
                 </div>

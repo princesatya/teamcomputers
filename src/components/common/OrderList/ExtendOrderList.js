@@ -6,7 +6,7 @@ const ExtendOrderList = ({ id, Orderid, ProductName, FinalPrice, OldPrice, deliv
     return (
         <>
             <div class="order_single_box">
-                <a href={"/#/my-order/" + Orderid} class="order_link">
+                <a href={"/#/my-order/" + id} class="order_link">
                     <div class="order_id">
                         <strong>Order # {Orderid}</strong>
                     </div>
@@ -21,7 +21,7 @@ const ExtendOrderList = ({ id, Orderid, ProductName, FinalPrice, OldPrice, deliv
                             </div>
                             <div class="product_price_row">
                                 <div class="final_price">
-                                    MRP: {getSampleCurrencyFormat(FinalPrice.currency, FinalPrice.value)}
+                                    MRP: {FinalPrice} 
                                 </div>
                                 <div class="del_status notdelivered">
                                     Status: {status}

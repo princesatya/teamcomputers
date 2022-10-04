@@ -9,6 +9,11 @@ import { useDispatch } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import MyAccountMenu from '../../components/common/MyAccountMenu/MyAccountMenu';
+import mydashboard from "../../assets/img/account/mydashboard.png";
+import accountinformation from "../../assets/img/account/accountinformation.png";
+import myorders from "../../assets/img/account/myorders.png";
+import addressbook from "../../assets/img/account/addressbook.png";
+import mywishlist from "../../assets/img/account/mywishlist.png";
 
 
 const AccountInformation = () => {
@@ -24,12 +29,31 @@ const AccountInformation = () => {
     const [prefix, setPrefix] = useState("");
     const { token } = useSelector((state) => state.login);
 
+    const [firstNameError, setFirstNameError] = useState(false);
+	const [lastNameError, setLastNameError] = useState(false);
+	const [phoneError, setPhoneError] = useState(false);
 
+
+    const validate = () => {
+		if (
+			isValidFirstName() &&
+			isValidLastName() &&
+			isValidPhone()
+		) {
+			return true;
+		} else {
+			isValidFirstName();
+			isValidLastName();
+			isValidPhone();
+		}
+		return false;
+	};
 
 
     const UpdateCustomerData = async () => {
-        if (!mobileNumberValidation())
-            return toast.error("please enter valid mobile number");
+        if(!validate()){
+            return;
+        }
         if (token) {
             const result = await apiHandler({
                 url: endpoint.GRAPHQL_URL,
@@ -80,18 +104,69 @@ const AccountInformation = () => {
             toast.error(result.data.customer.message);
         }
     };
-    const mobileNumberValidation = () => {
-        if (typeof mobileNumber !== "undefined") {
-            let isValid = true;
-            var pattern = new RegExp(/^[0-9\b]+$/);
-            if (!pattern.test(mobileNumber)) {
-                isValid = false;
-            } else if (mobileNumber.length != 10) {
-                isValid = false;
-            }
-            return isValid;
-        } else return true;
-    }
+
+    const isValidPhone = () => {
+		if (mobileNumber.trim() !== '') {
+			var phoneCheck = /^[6-9]\d{9}$/;
+			if (!phoneCheck.test(mobileNumber.trim())) {
+				setPhoneError('Invalid Contact Details! ');
+				return false;
+			} else {
+				setPhoneError('');
+				return true;
+			}
+		} else if (mobileNumber.trim() === '') {
+			setPhoneError('This is a Required Field! ');
+			return false;
+		} else {
+			setPhoneError('');
+			return true;
+		}
+	};
+
+    const isValidFirstName = () => {
+		if (firstName.trim() !== '') {
+			var nameCheck = /^[A-Za-z\s]+$/;
+			if (!nameCheck.test(firstName.trim())) {
+				setFirstNameError(
+					'First Name should contain Alphabetic Characters only!'
+				);
+				return false;
+			} else {
+				setFirstNameError('');
+				return true;
+			}
+		} else if (firstName.trim() === '') {
+			setFirstNameError('This is a Required Field! ');
+			return false;
+		} else {
+			setFirstNameError('');
+			return true;
+		}
+	};
+
+    const isValidLastName = () => {
+		if (lastName.trim() !== '') {
+			var nameCheck = /^[A-Za-z\s]+$/;
+			if (!nameCheck.test(lastName.trim())) {
+				setLastNameError(
+					'Last Name should contain Alphabetic Characters only!'
+				);
+				return false;
+			} else {
+				setLastNameError('');
+				return true;
+			}
+		} else if (lastName.trim() === '') {
+			setLastNameError('This is a Required Field! ');
+			return false;
+		} else {
+			setLastNameError('');
+			return true;
+		}
+	};
+
+
     return (
         <>
             <section className="custombreadcrumb">
@@ -121,11 +196,11 @@ const AccountInformation = () => {
                                 </div>
                                 <div className="dashboardmenu">
                                     <ul>
-                                        <li><a href="/#/dashboard"><img src="img/mydashboard.png" alt="" /> My Dashboard</a></li>
-                                        <li className="active"><a href="/#/account-information"><img src="img/accountinformation.png" alt="" />Account Information</a></li>
-                                        <li><a href="/#/order-listing"><img src="img/myorders.png" alt="" /> My Orders</a></li>
-                                        <li><a href="/#/address-book"><img src="img/addressbook.png" alt="" /> Address Book</a></li>
-                                        <li><a href="/#/my-wish-list"><img src="img/mywishlist.png" alt="" /> My Wishlist</a></li>
+                                        <li><a href="/#/dashboard"><img src={mydashboard} alt="" /> My Dashboard</a></li>
+                                        <li className="active"><a href="/#/account-information"><img src={accountinformation} alt="" />Account Information</a></li>
+                                        <li><a href="/#/order-listing"><img src={myorders} alt="" /> My Orders</a></li>
+                                        <li><a href="/#/address-book"><img src={addressbook} alt="" /> Address Book</a></li>
+                                        <li><a href="/#/my-wish-list"><img src={mywishlist} alt="" /> My Wishlist</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -140,13 +215,15 @@ const AccountInformation = () => {
                                         <div className="col-md-6">
                                             <div className="mb-3 mt-3">
                                                 <label for="text" className="form-label">First name</label>
-                                                <input type="text" className="form-control" id="" placeholder="" name="" value={firstName} onChange={(e) => setFirstName(e.target.value)} required />
+                                                <input type="text" className="form-control" id="" placeholder="" name="" value={firstName} onChange={(e) => setFirstName(e.target.value)} onBlur={isValidFirstName} required />
+                                                <div className='row'><div className='text-left text-small col-md-12 color_red'>{firstNameError}</div></div>
                                             </div>
                                         </div>
                                         <div className="col-md-6">
                                             <div className="mb-3 mt-3">
                                                 <label for="text" className="form-label">Last name</label>
-                                                <input type="text" className="form-control" id="" placeholder="" name="" value={lastName} onChange={(e) => setLastName(e.target.value)} required />
+                                                <input type="text" className="form-control" id="" placeholder="" name="" value={lastName} onChange={(e) => setLastName(e.target.value)} onBlur={isValidLastName} required />
+                                                <div className='row'><div className='text-left text-small col-md-12 color_red'>{lastNameError}</div></div>
                                             </div>
                                         </div>
                                     </div>
@@ -155,15 +232,13 @@ const AccountInformation = () => {
                                         <input type="email" className="form-control" id="email" placeholder="" name="email"
                                             value={email} onChange={(e) => setEmail(e.target.value)}
                                             disabled
-
                                         />
                                     </div>
                                     <div className="mb-3">
                                         <label for="text" className="form-label">Mobile NUMBER</label>
                                         <input type="text" className="form-control" id="mobilenumber" placeholder="" name="mobilenumber"
-                                            value={mobileNumber} onChange={(e) => setMobileNumber(e.target.value)}
-
-                                        />
+                                            value={mobileNumber} onChange={(e) => setMobileNumber(e.target.value)} onBlur={isValidPhone}/>
+                                        <div className='row'><div className='text-left text-small col-md-12 color_red'>{phoneError}</div></div>
                                     </div>
                                     <button type="submit" className="btn btn-primary"
                                         onClick={() => UpdateCustomerData()}

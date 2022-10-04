@@ -29,6 +29,8 @@ import {
   saveaddtoproductcart,
   saveShippingAddress,
 } from '../../../features/HomePageSlice/homeDataSlice';
+import { Toast } from 'bootstrap';
+
 
 const Checkout_Left_Block = ({ setPaymentData }) => {
   const [showAddressModal, setShowAddressModal] = useState(false);
@@ -38,7 +40,13 @@ const Checkout_Left_Block = ({ setPaymentData }) => {
   const [selectedShippingMethods, setSelectedShippingMethods] = useState({});
   const [selectedPaymentMethods, setSelectedPaymentMethods] = useState({});
   const [selectedBillingAddress, setSelectedBillingAddress] = useState({});
+
   const [step, setStep] = useState(0);
+
+  const [s_Address, setS_Address] = useState(false);
+  const [a_method, setA_Method] = useState(false);
+  const [u_paymentMethod, setU_Paymentmehod] = useState(false);
+  const [s_method, setS_Method] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -162,7 +170,9 @@ const Checkout_Left_Block = ({ setPaymentData }) => {
           query: SHIPPING_METHOD,
         },
       });
+      console.log("getCustomerShippingMethod 1:-", result);
       setLoader(false);
+
       if (!result.data.message) {
         setShippingMethods(result.data.customerCart);
         getAvailablePaymentMethod(result.data.customerCart.id);
@@ -185,10 +195,15 @@ const Checkout_Left_Block = ({ setPaymentData }) => {
         },
       });
       setLoader(false);
-      if (!result.data.message) {
+      console.log("getAvailablePaymentMethod 2:-", result)
+      if (result.data.cart) {
+        setA_Method(true);
         setPaymentMethods(result.data.cart);
+
         if (result.data.cart.available_payment_methods.length === 1) setSelectedPaymentMethods([result.data.cart.available_payment_methods[0]]);
         console.log([result.data.cart.available_payment_methods[0]]);
+      } else {
+        toast.error("error");
       }
     } else {
       navigate('/login');
@@ -252,7 +267,7 @@ const Checkout_Left_Block = ({ setPaymentData }) => {
             totalPrice + cartitem.quantity * cartitem.prices.price.value;
         }
       });
-      console.log('TOTAL - ', totalPrice);
+    console.log('TOTAL - ', totalPrice);
     return addtoproductcart[0]
       ? totalPrice
       : '0.00';
@@ -273,33 +288,48 @@ const Checkout_Left_Block = ({ setPaymentData }) => {
           query: SET_PAYMENT_METHOD,
         },
       });
+      console.log("updatePaymentMethod 3:-", result);
       setLoader(false);
       console.log('REACH', addtoproductcart);
-      setPaymentData({
-        grand_total: getTotalAmount(),
-        email: userData.email,
-        c_firstname: userData.firstname,
-        amount: getTotalAmount(),
-        sku: addtoproductcart[0].product.sku,
-        b_firstname: selectedBillingAddress.firstname,
-        b_lastname: selectedBillingAddress.lastname,
-        b_street_1: selectedBillingAddress.street[0],
-        b_street_2: selectedBillingAddress.street[0],
-        b_city: selectedBillingAddress.city,
-        b_postcode: selectedBillingAddress.postcode,
-        b_state: selectedBillingAddress.region.region ? selectedBillingAddress.region.region : "",
-        b_country: selectedBillingAddress.country_code,
-        b_phone: selectedBillingAddress.telephone,
-        s_firstname: selectedShippingMethods.firstname,
-        s_lastname: selectedShippingMethods.lastname,
-        s_street_1: selectedShippingMethods.street[0],
-        s_street_2: selectedShippingMethods.street[0],
-        s_city: selectedShippingMethods.city,
-        s_postcode: selectedShippingMethods.postcode,
-        s_state: selectedShippingMethods.region.region ? selectedShippingMethods.region.region : "",
-        s_country: selectedShippingMethods.country_code,
-        s_phone: selectedShippingMethods.telephone,
-      });
+      if (!s_Address) {
+        return Toast.error('Please set Shipping Address first');
+      }
+      if (!a_method) {
+        return Toast.error('Please set Available Payment Method');
+      }
+      if (!s_method) {
+        return Toast.error('Please set Shippment Method');
+      }
+      if (result.data.setPaymentMethodOnCart) {
+        setU_Paymentmehod(true);
+        setPaymentData({
+          grand_total: getTotalAmount(),
+          email: userData.email,
+          c_firstname: userData.firstname,
+          amount: getTotalAmount(),
+          sku: addtoproductcart[0].product.sku,
+          b_firstname: selectedBillingAddress.firstname,
+          b_lastname: selectedBillingAddress.lastname,
+          b_street_1: selectedBillingAddress.street[0],
+          b_street_2: selectedBillingAddress.street[0],
+          b_city: selectedBillingAddress.city,
+          b_postcode: selectedBillingAddress.postcode,
+          b_state: selectedBillingAddress.region.region ? selectedBillingAddress.region.region : "",
+          b_country: selectedBillingAddress.country_code,
+          b_phone: selectedBillingAddress.telephone,
+          s_firstname: selectedShippingMethods.firstname,
+          s_lastname: selectedShippingMethods.lastname,
+          s_street_1: selectedShippingMethods.street[0],
+          s_street_2: selectedShippingMethods.street[0],
+          s_city: selectedShippingMethods.city,
+          s_postcode: selectedShippingMethods.postcode,
+          s_state: selectedShippingMethods.region.region ? selectedShippingMethods.region.region : "",
+          s_country: selectedShippingMethods.country_code,
+          s_phone: selectedShippingMethods.telephone,
+        });
+      } else {
+        toast.error("Please set Payment Method");
+      }
     } else {
       navigate('/login');
     }
@@ -327,10 +357,17 @@ const Checkout_Left_Block = ({ setPaymentData }) => {
           query: SET_SHIPPING_ADDRESS,
         },
       });
+      console.log("setShippingAddress 4:-", result);
+
       setLoader(false);
-      setShippingMethodForPayment(result.data.setShippingAddressesOnCart.cart);
-      dispatch(saveShippingAddress(shipingAddress));
       console.log(result.data);
+      if (result.data.setShippingAddressesOnCart) {
+        setS_Address(true);
+        setShippingMethodForPayment(result.data.setShippingAddressesOnCart.cart);
+        dispatch(saveShippingAddress(shipingAddress));
+      } else {
+        toast.error(result.data.message);
+      }
     } else {
       navigate('/login');
     }
@@ -368,8 +405,15 @@ const Checkout_Left_Block = ({ setPaymentData }) => {
           query: SET_SHIPPING_METHOD,
         },
       });
+      console.log("setShippingMethodForPayment 5:-", result);
       setLoader(false);
       console.log(result.data);
+      if (result.data.setShippingMethodsOnCart) {
+        setS_Method(true);
+      }
+      else {
+        toast.error("error");
+      }
     } else {
       navigate('/login');
     }
@@ -396,8 +440,10 @@ const Checkout_Left_Block = ({ setPaymentData }) => {
           query: SET_BILLING_ADDRESS,
         },
       });
+      console.log("setBillingAddress 6:-", result);
       setLoader(false);
       console.log(result);
+
       if (paymentMethods &&
         paymentMethods.available_payment_methods && paymentMethods.available_payment_methods.length === 1)
         updatePaymentMethod();
@@ -805,14 +851,14 @@ const Checkout_Left_Block = ({ setPaymentData }) => {
         </div>
       </div>
       <>
-      {showAddressModal && (
-        <AddressModal
-          showModal={showAddressModal}
-          updateRecord={updateRecord}
-          record={record}
-          closeModal={() => setShowAddressModal(false)}
-        />
-      )}
+        {showAddressModal && (
+          <AddressModal
+            showModal={showAddressModal}
+            updateRecord={updateRecord}
+            record={record}
+            closeModal={() => setShowAddressModal(false)}
+          />
+        )}
       </>
       {loader && (
         <div className='loading-overlay'>

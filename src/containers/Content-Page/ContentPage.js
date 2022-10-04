@@ -3,15 +3,15 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { apiHandler } from '../../api';
 import { endpoint } from '../../api/endpoint';
-import { GET_ABOUT_US,GET_CMS_PAGE } from '../../assets/graphql';
+import { GET_ABOUT_US, GET_CMS_PAGE } from '../../assets/graphql';
 import './contentPage.css';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 const ContentPage = () => {
-	const {identifier} = useParams();
-	const [cmsContent, setCmsContent] = useState({ });
-	
+	const { identifier } = useParams();
+	const [cmsContent, setCmsContent] = useState({});
+
 	const getCmsPage = async () => {
 		if (!identifier) return;
 
@@ -20,21 +20,24 @@ const ContentPage = () => {
 			method: 'POST',
 			data: {
 				"base_url": endpoint.API_BASE_URL,
-				"variables": {identifier: identifier},
+				"variables": { identifier: identifier },
 				"query": GET_CMS_PAGE
 			},
 		});
 		if (!result.data.error_code) {
 			setCmsContent(result.data.cmsPage);
-			console.log(cmsContent);
 		}
 	};
 
 	useEffect(() => {
-		getCmsPage ();
+		getCmsPage();
 	}, [identifier]);
-
-
+	const renderHTML = (rawHTML) => React.createElement("div", { dangerouslySetInnerHTML: { __html: rawHTML } });
+	const unescapeHTML = (html) => {
+		var escapeEl = document.createElement("textarea");
+		escapeEl.innerHTML = html;
+		return escapeEl.textContent;
+	};
 	return (
 		<>
 			{/* Banner */}
@@ -42,8 +45,8 @@ const ContentPage = () => {
 				{/* <img src="" alt='Team Computers' /> */}
 				{/* {aboutUsData &&
 					aboutUsData.map((about, index) => ( */}
-					
-					{/* ))} */}
+
+				{/* ))} */}
 			</div>
 			<div className='mt-5'></div>
 			{/* Banner End */}
@@ -52,13 +55,13 @@ const ContentPage = () => {
 				<div className='container'>
 					{/* {aboutUsData &&
 						aboutUsData.map((about, index) => ( */}
-						
-							<div className='abouthead' style={{marginTop:"50px"}}> {cmsContent.title}</div>
-							{/* <div>
-								<p dangerouslySetInnerHTML={{ __html:cmsContent.content }}></p>
-							</div> */}
-						{/* ))} */}
-					<div className='row d-flex align-items-center justify-content-center mb-5'>
+
+					<div className='abouthead' style={{ marginTop: "50px" }}> {cmsContent.title}</div>
+					<div>
+						{renderHTML(unescapeHTML(cmsContent.content))}
+					</div>
+					{/* ))} */}
+					{/* <div className='row d-flex align-items-center justify-content-center mb-5'>
 						<div className='col-lg-7'>
 							<div className='abouttext'>
 								<h2>Who we are and what we do</h2>
@@ -120,7 +123,7 @@ const ContentPage = () => {
 								</p>
 							</div>
 						</div>
-					</div>
+					</div> */}
 				</div>
 			</section>
 			{/* About Info End*/}

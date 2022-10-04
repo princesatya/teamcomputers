@@ -1,33 +1,30 @@
-import React from 'react';
+import React from 'react'
+import './Thankyou.css'
+import { useNavigate } from 'react-router-dom';
+function Thankyou() {
+  const navigate = useNavigate();
+  const orderListing = () => {
+    navigate('/order-listing');
+  }
+  return (
+    // <div className='my-5'>
+    <section class="cart_wrap">
+      {/* <!-- [Container] --> */}
+      <div class="container">
 
+        <div class="col-md-8 col-lg-6 mx-auto">
+          <div class=" thankyoucontainer">
+            <h1><i class="fas fa-smile"></i></h1>
+            <h2><span>Thank You</span> For Buying From Us</h2>
+            <p>For Order Details Please <button onClick={() => orderListing()}>Click Here</button></p>
+          </div>
+        </div>
 
-const ThankYou = () => {
+      </div>
+      {/* <!-- [/Container] --> */}
+    </section>
+    // </div>
+  )
+}
 
-
-
-	return (
-		<>
-		
-			<div className='banner'>
-				<img
-					src=''
-					alt=''
-				/>
-			
-			</div>
-			<section>
-				<div className='container'>
-					<h3 className='pt-5 pb-5'>Thank You</h3>
-					<div className='fontbg'>
-						Thanks for reaching out to us for your queries.
-						<br />
-					
-					</div>
-					<div className='extraspace back-color-register '></div>
-				</div>
-				
-			</section>
-		</>
-	);
-};
-export default ThankYou;
+export default Thankyou

@@ -10,6 +10,11 @@ import OrderList from '../../components/common/OrderList/OrderDetail';
 import { useParams } from "react-router-dom";
 import MyAccountMenu from '../../components/common/MyAccountMenu/MyAccountMenu';
 import { useNavigate } from "react-router-dom";
+import mydashboard from "../../assets/img/account/mydashboard.png";
+import accountinformation from "../../assets/img/account/accountinformation.png";
+import myorders from "../../assets/img/account/myorders.png";
+import addressbook from "../../assets/img/account/addressbook.png";
+import mywishlist from "../../assets/img/account/mywishlist.png";
 
 const MyOrder = () => {
     const { getorderdetail } = useSelector(
@@ -24,6 +29,14 @@ const MyOrder = () => {
     const dispatch = useDispatch();
     const { token } = useSelector((state) => state.login);
     const getCustomerorderdetail = async (id) => {
+        let new_id = id;
+        console.log("1",new_id);
+        let index = id.indexOf('TCORD');
+        console.log("2",index);
+        if (index != -1) {
+            new_id = id.substring(5, id.length -1);
+            console.log("3",new_id);
+        }
         if (token) {
             const result = await apiHandler({
                 url: endpoint.GRAPHQL_URL,
@@ -31,7 +44,7 @@ const MyOrder = () => {
                 authToken: token,
                 data: {
                     "base_url": endpoint.API_BASE_URL,
-                    "variables": { id },
+                    "variables": { id: new_id },
                     "query": GET_ORDER_DETAILS
                 },
             });
@@ -87,11 +100,11 @@ const MyOrder = () => {
                                 </div>
                                 <div class="dashboardmenu">
                                     <ul>
-                                        <li><a href="/#/dashboard"><img src="img/mydashboard.png" alt="" /> My Dashboard</a></li>
-                                        <li><a href="/#/account-information"><img src="img/accountinformation.png" alt="" /> Account Information</a></li>
-                                        <li class="active"><a href="/#/order-listing"><img src="img/myorders.png" alt="" /> My Orders</a></li>
-                                        <li><a href="/#/address-book"><img src="img/addressbook.png" alt="" /> Address Book</a></li>
-                                        <li><a href="/#/my-wish-list"><img src="img/mywishlist.png" alt="" /> My Wishlist</a></li>
+                                        <li><a href="/#/dashboard"><img src={mydashboard} alt="" /> My Dashboard</a></li>
+                                        <li><a href="/#/account-information"><img src={accountinformation} alt="" /> Account Information</a></li>
+                                        <li class="active"><a href="/#/order-listing"><img src={myorders} alt="" /> My Orders</a></li>
+                                        <li><a href="/#/address-book"><img src={addressbook} alt="" /> Address Book</a></li>
+                                        <li><a href="/#/my-wish-list"><img src={mywishlist} alt="" /> My Wishlist</a></li>
                                     </ul>
                                 </div>
                             </div>
