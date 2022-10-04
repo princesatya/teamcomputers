@@ -1,0 +1,78 @@
+.banner {
+    position: relative;
+}
+.banner img {
+    width: 100%;
+    object-fit: cover;
+    padding-top: 80px;
+}
+.breadscrumb {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    bottom: 80px;
+    color: #fff;
+    font-size: 45px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.contactform{
+    padding: 40px;
+}
+
+.contactform .form-group{
+    margin-bottom: 10px;
+}
+
+.contactform h2 {
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+.contactform button {
+    line-height: normal;
+    padding: 15px 22px;
+    letter-spacing: normal;
+    font-size: 15px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, #00abc5 0%, #dfcf18 100%, #dfcf18 100%);
+    border: none;
+    margin-top: 10px;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.contactBox {
+    border: 1px solid #cdcccc;
+    text-align: center;
+    padding: 30px;
+    border-radius: 4px;
+    height: 100%;
+    font-size: 16px;
+}
+.contactBox:hover {
+    background: #f5f5f5;
+}
+.contactBox i {
+    font-size: 35px;
+    margin-bottom: 10px;
+    color: #00abc5;
+}
+.contactBox h3 {
+    font-size: 24px;
+    display: block;
+    margin: 10px 0;
+}
+.contactBox a {
+    color: #242424;
+    word-break: break-word;
+}
+
+/*-------responsive-----------*/
+@media only screen and (max-width: 767px){
+.breadscrumb{font-size: 20px;}
+.contactform{padding: 20px 0px 0px;}
+.contactBox{height: auto; margin-bottom: 10px;}
+}
+

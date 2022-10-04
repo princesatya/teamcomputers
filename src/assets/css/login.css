@@ -1,0 +1,116 @@
+.mainsection-title h2 {font-size: 40px;font-weight: 700;position: relative;color: #00abc5;}
+.mainsection-title h2::before {margin: 0 15px 10px 0;}
+.mainsection-title h2::after {margin: 0 0 10px 15px;}
+.mainsection-title h2::before, .mainsection-title h2::after {content: "";width: 20%;height: 2px;background: #3498db;display: inline-block;}
+
+section.login_wrap {
+    padding: 20px 0;
+    background-color: #f3f3f3;
+}
+.loginform_wrap {
+    margin: 150px auto 40px;
+    width: 100%;
+}
+.log_sign_form{
+    min-height: 300px;
+    background-color: #fff;
+    padding: 20px 25px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.08);
+}
+.log_sign_form form{
+    margin: 20px 0;
+}
+.log_sign_form h3{
+    margin-bottom: 10px;
+}
+.log_sign_form p{
+    margin-bottom: 10px;
+}
+.log_sign_form label{
+    display: block;
+    margin-bottom: 8px;
+}
+.log_sign_form input{
+    border: none;
+    background-color: #f3f3f3;
+    width: 100%;
+    display: block;
+    padding: 3px 10px;
+    height: 40px;
+    margin-bottom: 8px;
+}
+.login_options {
+    display: block;
+    padding: 20px 25px;
+    background-color: #181818;
+    color: #fff;
+    height: 100%;
+}
+.login_options ul {
+    padding: 0px;
+    margin: 0px;
+}
+.login_options ul li {
+    list-style: none;
+}
+.login_options h3{
+    margin-bottom: 10px;
+}
+.login_options p{
+    margin-bottom: 10px;
+}
+.log_sign_form p {
+    margin: 0px 0px 20px;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 32px;
+}
+.login_options li {
+    padding: 8px 0px;
+}
+.default_button {
+    background: linear-gradient(90deg, #00abc5 0%, #dfcf18 100%, #dfcf18 100%);
+    color: #fff;
+    border-radius: 4px;
+    margin-top: 10px;
+    box-shadow: none;
+    border: none !important;
+    padding: 10px 15px !important;
+    font-size: 14px;
+    font-weight: 600 !important;
+
+}
+.default_button:hover{
+    color: #ffffff;
+}
+
+
+/* [/Login] */
+
+
+/*-------responsive-----------*/
+@media only screen and (max-width: 767px){
+.login_options{display: none;}
+.loginform_wrap {margin: 90px auto 40px;}
+}
+
+.loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 80px;
+    height: 80px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+  }
+  
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

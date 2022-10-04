@@ -1,0 +1,471 @@
+.mainsection-title h2 {
+    font-size: 35px !important;
+    font-weight: 700 !important;
+    position: relative !important;
+    color: #00abc5 !important;
+}
+
+.mainsection-title h2::before {
+    margin: 0 15px 10px 0 !important;
+}
+
+.mainsection-title h2::after {
+    margin: 0 0 10px 15px !important;
+}
+
+.mainsection-title h2::before, .mainsection-title h2::after {
+    content: "" !important;
+    width: 20% !important;
+    height: 2px !important;
+    background: #3498db !important;
+    display: inline-block !important;
+}
+
+section.cart_wrap {
+    padding: 40px 0 !important;
+    background-color: #f3f3f3 !important;
+}
+
+
+
+.leftsidebar {
+
+    /* border: 1px solid #868686 !important; */
+
+    background: #fff !important;
+
+}
+
+.profileBox {
+
+    position: relative !important;
+
+    height: 100% !important;
+
+    padding: 40px 10px 40px 90px !important;
+
+    background: #FFFBF5 !important;
+
+    border-bottom: 1px solid #868686 !important;
+
+}
+
+.userprofileImg {
+
+    position: absolute !important;
+
+    width: 60px !important;
+
+    height: 60px !important;
+
+    background: #00ABC5 !important;
+
+    top: 22px !important;
+
+    left: 15px !important;
+
+    border-radius: 50% !important;
+
+    line-height: normal !important;
+
+    text-align: center !important;
+
+    display: flex !important;
+
+    align-items: center !important;
+
+    justify-content: center !important;
+
+    font-size: 24px !important;
+
+    font-weight: 600 !important;
+
+    color: #fff !important;
+
+}
+
+.profileBox h1 {
+
+    font-size: 20px !important;
+
+    color: #303030 !important;
+
+    margin: 0 !important;
+
+}
+
+.dashboardmenu {
+
+    padding: 30px 40px !important;
+
+}
+
+.dashboardmenu ul {
+
+    padding: 0 !important;
+
+    margin: 0 !important;
+
+}
+
+.dashboardmenu ul li {
+
+    list-style: none !important;
+
+    padding: 12px 0px !important;
+
+}
+
+.dashboardmenu img {
+
+    width: 26px !important;
+
+    vertical-align: bottom !important;
+
+    margin-right: 5px !important;
+
+    filter: gray !important;
+
+    -webkit-filter: grayscale(1) !important;
+
+}
+
+.dashboardmenu ul li:hover img {
+
+    filter: none !important;
+
+}
+
+.dashboardmenu ul li.active img {
+
+    filter: none !important;
+
+}
+
+.dashboardmenu ul li.active a {
+
+    color: #00ABC5 !important;
+
+}
+
+
+
+.dashboardmenu ul li a {
+
+    display: block !important;
+
+    font-size: 16px !important;
+
+    color: #606060 !important;
+
+    font-weight: 600 !important;
+
+}
+
+.dashboardmenu ul li a:hover {
+
+    color: #00ABC5 !important;
+
+    text-decoration: none !important;
+
+}
+
+.rightsidebar {
+
+    border: 1px solid #868686 !important;
+
+    background: #fff !important;
+
+    padding: 30px !important;
+
+    height: 100% !important;
+
+}
+
+.userinfo {
+
+    position: relative !important;
+
+}
+
+.userinfo strong {
+
+    display: block !important;
+
+    font-size: 18px !important;
+
+    margin-bottom: 10px !important;
+
+}
+
+.userinfo p {
+
+    font-size: 15px !important;
+
+    line-height: 24px !important;
+
+}
+
+.contactuserInfo {
+
+    margin-top: 50px !important;
+
+}
+
+.contactuserInfo strong {
+
+    font-size: 20px !important;
+
+}
+
+.contactuserInfo a {
+
+    font-size: 20px !important;
+
+    text-decoration: none !important;
+
+    font-weight: 600 !important;
+
+    text-align: right !important;
+
+    float: right !important;
+
+    color: #0096EA !important;
+
+}
+
+.contactuserInfo_list {
+
+    padding: 0px !important;
+
+    margin: 10px 0px 0px !important;
+
+}
+
+.contactuserInfo_list li {
+
+    list-style: none !important;
+
+    color: #000000 !important;
+
+    font-size: 15px !important;
+
+    display: block !important;
+
+    padding: 5px 0px !important;
+
+}
+
+.contactuserInfo_list li a {
+
+    float: none !important;
+
+    font-size: 15px !important;
+
+    color: #000000 !important;
+
+    font-weight: normal !important;
+
+}
+
+.rightsidebar form label {
+
+    font-weight: 600 !important;
+
+    color: #606060 !important;
+
+}
+
+.rightsidebar form button {
+
+    line-height: normal !important;
+
+    padding: 12px 22px !important;
+
+    letter-spacing: normal !important;
+
+    font-size: 14px !important;
+
+    border-radius: 4px !important;
+
+    background: linear-gradient(90deg, #00abc5 0%, #dfcf18 100%, #dfcf18 100%) !important;
+
+    border: none !important;
+
+    margin-top: 10px !important;
+
+    color: #ffffff !important;
+
+    font-weight: 600 !important;
+
+}
+
+.rightsidebar form .form-control {
+
+    border-color: #B0B0B0 !important;
+
+}
+
+.addaddress {
+
+    position: absolute !important;
+
+    right: 0 !important;
+
+    top: -4px !important;
+
+    border: 1px solid #8E0E35 !important;
+
+    padding: 8px 12px 6px 12px !important;
+
+    display: block !important;
+
+    color: #8E0E35 !important;
+
+    font-weight: 600 !important;
+
+    border-radius: 4px !important;
+
+    line-height: 20px !important;
+
+    margin: 0 !important;
+
+}
+
+.addaddress:hover {
+
+    background: #8E0E35 !important;
+
+    color: #ffffff !important;
+
+    text-decoration: none !important;
+
+}
+
+.addressBox {
+
+    border: 1px dashed #8E0E35 !important;
+
+    border-radius: 4px !important;
+
+    padding: 30px 30px !important;
+
+    margin-top: 20px !important;
+
+    background: #FFFBF5 !important;
+
+}
+
+.addressBox h3 {
+
+    font-size: 18px !important;
+
+}
+
+.addressBox p {
+
+    padding-bottom: 50px !important;
+
+    font-size: 16px !important;
+
+}
+
+.addressBox a {
+
+    font-size: 16px !important;
+
+    color: #8E0E35 !important;
+
+    font-weight: 600 !important;
+
+    margin-right: 20px !important;
+
+    text-decoration: underline !important;
+
+}
+
+
+
+.rightsidebar .accessoriesproductbox .productDetails .fa {
+
+    font-size: 30px !important;
+
+    padding: 5px 10px !important;
+
+}
+
+
+
+/*-------responsive-----------*/
+
+@media only screen and (max-width: 767px) {
+
+    .login_options {
+        display: none !important;
+    }
+
+    .loginform_wrap .mainsection-title h2 {
+        font-size: 24px !important;
+    }
+
+    .mainsection-title h2 {
+        font-size: 24px !important;
+    }
+
+    .addaddress {
+        position: inherit !important;
+        top: 0px !important;
+        text-align: center !important;
+    }
+
+}
+
+
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+    .profileBox {
+        padding: 10px !important;
+        text-align: center !important;
+    }
+
+    .userprofileImg {
+        position: inherit !important;
+        top: 0 !important;
+        left: 0 !important;
+        font-size: 22px !important;
+        margin: 0px auto 10px !important;
+    }
+
+    .profileBox h1 {
+        font-size: 18px !important;
+    }
+
+    .dashboardmenu {
+        padding: 10px !important;
+    }
+
+    .dashboardmenu img {
+        width: 22px !important;
+        margin-right: 0 !important;
+    }
+
+    .dashboardmenu ul li a {
+        font-size: 14px !important;
+        font-weight: 500 !important;
+    }
+
+    .addressBox {
+        padding: 10px !important;
+    }
+
+    .addressBox h3 {
+        font-size: 16px !important;
+    }
+
+    .addressBox h3 input[type="radio"] {
+        display: block !important;
+        margin-bottom: 10px !important;
+    }
+
+}

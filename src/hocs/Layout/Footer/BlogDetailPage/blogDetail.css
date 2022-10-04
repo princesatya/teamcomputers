@@ -1,0 +1,16 @@
+.blogsocialmedia {
+    display: flex;
+    list-style: none;
+    gap: 10px;
+}
+
+.blogsocialmedia li{
+    height: 40px;
+    width: 40px;
+    border: 1px solid black;
+    border-radius: 50%;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

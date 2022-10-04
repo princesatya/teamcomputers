@@ -1,0 +1,119 @@
+.breadcrumb-item+.breadcrumb-item::before {
+    float: left;
+    padding-right: 0.5rem;
+    color: #868e96;
+    content: " | ";
+}
+
+.boxp img {
+    border-radius: 6px;
+}
+
+.boxp {
+    padding-bottom: 20px
+}
+
+.boxp:hover {
+    box-shadow: 4px 6px 11px #00000038;
+    border-radius: 6px;
+    background: #ffffff !important;
+}
+
+.boxp a:hover {
+    text-decoration: none !important;
+}
+
+.boxp small {
+    font-size: 18px;
+    font-weight: 400;
+    color: #000;
+    text-decoration: none !important
+}
+
+.boxp p span {
+    font-size: 25px;
+    font-weight: 700;
+    color: #000;
+    text-decoration: none !important
+}
+
+.pbtn {
+    font-size: 16px;
+    border: 0px;
+    font-weight: 550;
+    background: transparent;
+    color: #000;
+}
+
+.productnamesk {
+    text-align: left;
+    font-size: 20px;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 6px;
+    color: #00abc5;
+}
+
+.main-heading-inner {
+    font-size: 30px;
+    font-weight: 800;
+    color: #00abc5;
+
+
+}
+.leftsideproductlisting .productImg img {
+    width: 190px;
+    height: 200px;
+    padding: 10px;
+    margin: 0px auto;
+    text-align: center;
+    display: block;
+}
+
+/*-------responsive-----------*/
+@media only screen and (max-width: 767px) {
+    .boxp p span {
+        font-size: 18px;
+    }
+
+    .boxp small {
+        font-size: 16px;
+    }
+
+    .textdes p {
+        margin: 0;
+        font-size: 16px;
+    }
+}
+
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .pe-5 {
+        padding-right: 0rem !important;
+    }
+
+    .pt-7 {
+        padding-top: 3rem !important;
+    }
+
+    .custombreadcrumb {
+        padding-top: 80px;
+    }
+
+    .boxp p span {
+        font-size: 16px;
+    }
+
+    .boxp small {
+        font-size: 14px;
+    }
+
+    .textdes p {
+        margin: 0;
+        font-size: 14px;
+    }
+}
+
+.gid-row-gap-style {
+    grid-row-gap: 30px;
+}

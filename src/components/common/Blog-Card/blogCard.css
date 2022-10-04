@@ -1,0 +1,11 @@
+.card-title{
+    color: rgb(245, 88, 88);
+  }
+  
+  .card-read{
+    color: rgb(246, 89, 89);
+  }
+  
+ .card a{
+    text-decoration: none !important;
+  }

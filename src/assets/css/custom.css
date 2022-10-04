@@ -1,0 +1,457 @@
+/** Author : Futuresoftindia **/
+/** Project Team Computers **/
+
+/* Button CSS */
+.owl-Carousel-team-computer .carousel-item img{
+  width: 500px !important;
+}
+.custombutton {
+  border: 1px solid #222529 !important;
+  color: #222529 !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  letter-spacing: normal !important;
+  text-transform: capitalize !important;
+  margin-right: 5px !important;
+  border-radius: 4px !important;
+}
+
+.custombutton:hover {
+  background: linear-gradient(90deg, #00ABC5 0%, #DFCF18 97.22%) !important;
+  border-radius: 2px !important;
+  color: #fff !important;
+  border-color: #ffffff !important;
+}
+
+.custombutton .fas {
+  margin-right: 2px !important;
+}
+.custombutton p a:nth-child(2) {
+  display: none;
+}
+/* Button CSS END */
+
+
+
+/* New Launches Homepage */
+.productimg {
+  position: relative;
+}
+
+.productimg:before {
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute !important;
+  top: 0 !important;
+  background: #dee2e6 !important;
+  content: '';
+  left: -50% !important;
+}
+
+.productdetail {
+  padding: 50px !important;
+}
+
+.productdetail h2 {
+    color: #000!important;
+    font-size: 30px!important;
+    line-height: normal;
+}
+
+.productdetail strong {
+  display: block !important;
+  font-size: 24px !important;
+  font-weight: 600 !important;
+}
+
+.productdetail span {
+  color: #000000 !important;
+  font-size: 14px !important;
+}
+
+.productdetail span i {
+  font-size: 20px !important;
+  text-decoration: line-through !important;
+  color: #FF0000 !important;
+}
+
+.productdetail p {
+  display: block !important;
+  padding: 10px 0px !important;
+  font-size: 20px !important;
+}
+
+/* New Launches Homepage END */
+
+
+/* Categoreis Homepage */
+.bg-gray-100 {
+  background: #fbfbfd !important;
+}
+
+.categoreis-grid-row-gap {
+  grid-row-gap: 20px !important;
+}
+
+.categoreisProduct {
+  text-align: center;
+  padding: 80px 0 0;
+}
+
+.categoreisProduct h3 {
+  font-size: 35px;
+  line-height: 30px;
+}
+
+.categoreisProduct span {
+  display: block;
+  font-weight: 400;
+  font-size: 20px;
+  color: #000000;
+}
+
+.categoreisProduct a {
+  display: block;
+  font-size: 18px;
+  color: #00ABC5;
+  padding-bottom: 20px;
+}
+
+.categories-product-box-text-decoration-none .categoreisProduct a {
+  text-decoration: none;
+}
+
+.categories-product-box-text-decoration-none .categoreisProduct a:hover {
+  text-decoration: underline;
+  color: #00ABC5;
+}
+
+.black-bg {
+  background: #000000;
+  height: 100%;
+}
+
+.black-bg .categoreisProduct h3 {
+  color: #ffffff;
+}
+
+.black-bg .categoreisProduct span {
+  color: #ffffff;
+}
+
+.black-bg .categoreisProduct a {
+  color: #00ABC5;
+}
+
+/* Categoreis Homepage END */
+
+
+/* Accessories Homepage */
+.productaddsection {}
+
+.addbanner {
+  background: #f2f2f2;
+  padding: 30px 30px 0px;
+  border-radius: 6px;
+  height: 100%;
+  position: relative;
+}
+
+.addbanner h4 {
+  font-size: 45px;
+  font-weight: 500;
+}
+
+.addbanner h4 span {
+  font-weight: 200;
+}
+
+.addbanner p {
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.addbanner a {
+  color: #00ABC5;
+  font-size: 18px;
+  display: block;
+  margin-top: 20px;
+}
+
+.addbanner img {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    border-radius: 0px 0px 8px 8px;
+}
+.Text-decoration-adbanner-byAirpods .addbanner a {
+  text-decoration: none;
+}
+
+.Text-decoration-adbanner-byAirpods .addbanner a:hover {
+  text-decoration: underline;
+  color: #00ABC5;
+}
+
+.productaddsection .col-md-9 .col-md-4 {
+  margin-bottom: 20px;
+}
+
+.accessoriesproductbox {
+  background: #F2F2F2 !important;
+  border-radius: 6px !important;
+  padding: 15px !important;
+  height: 100% !important;
+  position: relative !important;
+}
+
+.productImg {
+
+  position: relative;
+  background: #ffffff;
+  border-radius: 6px;
+  height: 200px;
+
+}
+
+.productImg img {
+  width: auto;
+  height: 100%;
+  padding: 10px;
+}
+
+.productImg .newtag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: linear-gradient(90deg, #00ABC5 0%, #DFCF18 100%);
+  border-radius: 2px;
+  color: #fff;
+  padding: 2px 10px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.productDetails {
+  margin-top: 20px;
+}
+
+.productDetails h5 {
+  font-size: 20px;
+  font-weight: 700;
+  display: block;
+  margin: 0px;
+}
+
+.productDetails strong {
+  display: block;
+  margin: 10px 0;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.productDetails strong b {
+  font-size: 25px;
+}
+
+.addmore {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  right: 0;
+  z-index: 9;
+  height: 90%;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: #000000a3;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 0px auto;
+}
+
+.addmore a {
+  font-size: 25px;
+  color: #fff;
+}
+
+.addmore a .fas {
+  font-size: 70px;
+}
+
+.addmore span {
+  display: block;
+}
+
+.addmore:hover {
+  background: #000000e8;
+}
+
+.text-decoration-Browse-more .addmore a {
+  text-decoration: none !important;
+}
+
+.text-decoration-Browse-more .addmore a:hover {
+  text-decoration: underline !important;
+  color: #fff !important;
+}
+
+/* Accessories Homepage END */
+
+
+/* Homepage About */
+.aboutintro {
+  text-align: center;
+}
+
+.textcontent p {
+  color: #4F4F4F;
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.aboutintro a {
+  display: block;
+  font-size: 22px;
+  color: #00abc5;
+}
+
+.aboutintro .textcontent a {
+  text-decoration: none !important;
+}
+
+.aboutintro .textcontent a:hover {
+  text-decoration: underline !important;
+  color: #00abc5 !important;
+  ;
+}
+
+/* Homepage About END */
+
+/* Inner page Breadcrumb */
+.custombreadcrumb {
+  padding-top: 112px;
+  border-bottom: 1px solid #A8A8A8;
+}
+
+.custombreadcrumb .breadcrumb {
+  padding: 1rem 0 !important;
+}
+
+.product-custom-filter .custombreadcrumb .breadcrumb {
+  padding: 1rem 0;
+}
+
+.innertopbanner {
+  width: 100%;
+  height: 200px;
+  margin: 0px auto;
+  text-align: center;
+  background: #000000;
+}
+
+.innertopbanner img {
+  width: auto;
+  height: 100%;
+}
+
+/* Inner page Breadcrumb END */
+
+.circle-slider .owl-dots {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  bottom: 10px;
+}
+
+.bounce-loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 70px;
+  margin: -9px 0 0 -35px;
+  transition: all 0.2s;
+  text-align: center;
+  z-index: 10000;
+}
+
+.bounce-loader .bounce1,
+.bounce-loader .bounce2,
+.bounce-loader .bounce3 {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border-radius: 100%;
+  background-color: #ccc;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.15);
+  -webkit-animation: 1.4s ease-in-out 0s normal both infinite bouncedelay;
+  animation: 1.4s ease-in-out 0s normal both infinite bouncedelay;
+}
+
+.bounce-loader .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+
+.bounce-loader .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+.productaddsection .col-md-3{
+  margin-bottom: 20px;
+}
+
+.load_more_row button{
+  margin: 0px 5px;
+}
+.card-body button{
+  border: none;
+  margin-top: 20px !important;
+}
+/* Responsive css for all pages FSSK */
+@media only screen and (max-width: 767px) {
+.productdetail h2 {font-size: 40px;}
+.addbanner {height: auto;margin-bottom: 20px;}
+.addbanner img {position: inherit;bottom: inherit;left: inherit;}
+.aboutintro .mainsection-title h2::before {width: 10%;}
+.aboutintro .mainsection-title h2::after {width: 10%;}
+.circle-slider .item {height: auto !important;}
+.carousel-inner {border-radius: 6px!important;}
+.mainsection-title h2::before {width: auto;display: none;}
+.mainsection-title h2::after {width: 50%;}
+.custombreadcrumb {padding-top: 80px;}
+.customslider {padding-top: 90px;}
+.carousel-indicators{bottom: -40px;}
+.carousel-indicator-d .carousel-indicators [data-bs-target] {border: none !important;width: 14px !important;height: 14px !important;}
+.carousel-indicators button.active {opacity: 0.2 !important;}
+.productdetail {padding: 30px!important;}
+.owl-Carousel-team-computer .carousel-indicators [data-bs-target]{border: none !important;width: 14px !important;height: 14px !important;}
+.owl-Carousel-team-computer .mb-5 {margin-bottom: 20px !important;}
+.mobile-carousel-team-computer .productaddsection .mx-auto { padding-top: 0px !important;}
+.mobile-carousel-team-computer .carousel-indicators [data-bs-target]{border: none !important;width: 14px !important;height: 14px !important;}
+.customfilter {margin: 0;padding: 0 !important; width: 100%;}
+.customfilter .accordion{padding: 0px !important;}
+.product-custom-filter .leftsidebar .customfilter .customMobile h4{width: 100%;}
+.product-custom-filter .customfilter .accordion-body {padding: 0px 20px !important;}
+.dropdown-content {width: 100% !important; max-width: inherit; background: #f4f4f4;}
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+.custombreadcrumb {padding-top: 80px;}
+.productdetail {padding: 20px;}
+.circle-slider h2 {font-size: 30px !important;line-height: normal !important;}
+.categoreisProduct h3 {font-size: 25px;line-height: 16px;}
+.categoreisProduct span {font-weight: 500;font-size: 14px;}
+.productdetail strong {font-size: 20px;}
+.productimg:before {height: auto;left: 0;}
+.productimg .item {height: auto !important;}
+.customslider .item {height: auto !important;}
+.addbanner h4 {font-size: 20px;}
+.addbanner p {font-size: 16px;line-height: 22px;}
+.productDetails h5 {font-size: 14px;}
+.productDetails strong b {font-size: 18px;}
+.aboutintro .mainsection-title h2 {font-size: 30px;}
+}
+
